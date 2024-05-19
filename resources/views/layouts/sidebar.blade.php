@@ -56,7 +56,7 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{route('sanphams')}}">Danh sách</a>
-                        <a class="nav-link" href="{{route('sanphams.add')}}">Thêm mới đơn hàng</a>
+                        <a class="nav-link" href="{{route('sanphams.add')}}">Thêm mới Sản phẩm</a>
                     </nav>
                 </div>
                 <!-- Menu 3 cap - neu dung thi su dung template nay -->

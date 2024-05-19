@@ -59,6 +59,8 @@
               <th>Cán màng</th>                            
               <th>Cán màng</th>                            
               <th>Cán màng</th>                            
+              <th>Ghi chú</th>                            
+              <th>Mô tả</th>                            
               <th>Action</th>                            
             </tr>
           </thead>
@@ -121,6 +123,8 @@
           {data: 'bocot', name: 'bocot'},
           {data: 'quanmang', name: 'quanmang'},
           {data: 'ghichu', name: 'ghichu'},
+          {data: 'ketcau', name: 'ketcau'},
+          {data: 'mota', name: 'mota'},
           {data: 'action', name: 'action'},
         ]
       });

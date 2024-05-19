@@ -44,13 +44,10 @@ class SanphamController extends Controller
 
     public function save(Request $request)
     {
+        $ketcau = " {$request->kieusp}-{$request->dai}-{$request->rong}-{$request->cao}-{$request->song}-{$request->kieuin}";
+        $mota = " Kiểu: {$request->kieusp}, Kích thước: {$request->dai}x{$request->rong}x{$request->cao}, Sóng: {$request->song}, In: {$request->kieuin}";
         $data = [
-            // 'madonhang' => $request->madonhang,
-            // 'ngaygiaohang' => $request->ngaygiaohang,
-            // 'loaidonhang' => $request->loaidonhang,
-            // 'soluong' => $request->soluong,
-            // 'congdoan' => '',
-            // 'trangthai' => 'Chưa sản xuất'
+
             'tensp' => $request->tensp,
             'masp' => $request->masp,
             'kieusp' => $request->kieusp,
@@ -96,7 +93,11 @@ class SanphamController extends Controller
             'quanmang' => $request->quanmang,
             'trangthai' => '0',
             'congdoan' => '',
-            'donhang_id' => $request->donhang_id
+            'donhang_id' => $request->donhang_id,
+            'ketcau' => $ketcau,
+            'mota' => $mota,
+            'gia' => $request->gia,
+            'soluong' => $request->soluong
         ];
 
         Sanpham::create($data);

@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}', 'edit')->name('khachhangs.edit');
         Route::post('edit/{id}', 'update')->name('khachhangs.update');
         Route::get('delete/{id}', 'delete')->name('khachhangs.delete');
+
+        Route::get('search/{search}', 'search')->name('khachhang.search');
     });
 
     Route::controller(ProductController::class)->prefix('products')->group(function () {
@@ -101,6 +103,8 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}', 'edit')->name('donhangs.edit');
         Route::post('edit/{id}', 'update')->name('donhangs.update');
         Route::get('delete/{id}', 'delete')->name('donhangs.delete');
+
+        Route::post('themkhachhang', 'themkhachhang')->name('donhangs.themkhachhang.save');
     });
 
     Route::controller(SanphamController::class)->prefix('sanphams')->group(function () {

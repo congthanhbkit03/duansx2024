@@ -92,4 +92,13 @@ class KhachhangController extends Controller
 
         return redirect()->route('khachhangs');
     }
+
+    public function search($search)
+    {
+
+        $khachhang = Khachhang::where('tenkh', 'LIKE', "%$search%")->get();
+
+        return response()->json($khachhang);
+
+    }
 }

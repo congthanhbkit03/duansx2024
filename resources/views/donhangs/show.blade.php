@@ -2,7 +2,7 @@
  
 @section('title', 'Thông tin Đơn Hàng')
 
-@push('scripts')
+@push('styles')
   <style>
   .hide{
   display: none;
@@ -14,73 +14,334 @@
 <!-- <form action="{{ isset($donhang) ? route('donhangs.update', $donhang->id) : route('donhangs.save') }}" method="post">
     @csrf -->
     <div class="row">
-      <div class="col-4">
+      <div class="col-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">{{ isset($donhang) ? 'Form Edit donhang' : 'Form plus donhang' }}</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Thông tin đơn hàng</h6>
           </div>
           <div class="card-body">
-            <div class="form-group">
-              <label for="item_code">Mã Đơn hàng</label>
-              <input type="text" class="form-control" id="madonhang" name="madonhang" value="{{ isset($donhang) ? $donhang->madonhang : '' }}">
-            </div>
-            <div class="form-group">
-              <label for="donhangname">Số lượng</label>
-              <input type="text" class="form-control" id="soluong" name="soluong" value="{{ isset($donhang) ? $donhang->soluong : '' }}">
-            </div>
-           
-            <div class="form-group">
-              <label for="price">Loại đơn hàng</label>
-              <!-- <input type="number" class="form-control" id="loaidonhang" name="loaidonhang" value="{{ isset($donhang) ? $donhang->loaidonhang : '' }}"> -->
-              <select id="loaidonhang" name="loaidonhang">
-                <option>Đầy đủ</option>
-                <option>Không đầy đủ</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="donhangname">Ngày giao hàng</label>
-              <input type="date" class="form-control" id="ngaygiaohang" name="ngaygiaohang" value="{{ isset($donhang) ? $donhang->ngaygiaohang : '' }}">
-            </div>
-
+            <div class="row">
+              <div class="col">
+                Tên khách hàng:<strong> {{$donhang->khachhang->tenkh}} </strong>
+              </div>
+              <div class="col">
+              Ngày giao hàng:<strong> {{$donhang->ngaygiaohang}} </strong>
+              </div>
+              <div class="col">
+              Trạng thái đơn hàng:<strong> {{$donhang->trangthai}} </strong>
+              </div>
+            </div>           
           </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Save</button>
+          <div class="card-footer">            
           </div>
         </div>
       </div>
-      <div class="col-8">
+    </div>
+    <div class="row">
+      <div class="col-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Các sản phẩm trong đơn hàng</h6>
-            <button class="btn btn-success" id="themsp">Thêm sản phẩm</button>
+            <div class="row">
+              <div class="col-10"><h6 class="m-0 font-weight-bold text-primary">Các sản phẩm trong đơn hàng</h6></div>
+              <div class="col-2"> <button class="btn btn-success" id="themsp">Thêm sản phẩm</button></div>
+            </div>
+            
           </div>
           <div class="card-body">
             <!-- <form id="formsanpham" class="hide" action="{{ isset($donhang) ? route('donhangs.update', $donhang->id) : route('donhangs.save') }}" method="post"> -->
             <form id="formsanpham" class="hide" action="{{ route('donhangs.show.themsp', $donhang->id) }}" method="post">
-            @csrf
-              <div class="row"><label for="">Ma san pham</label>
-              <input type="text" name="masanpham"></div>
-              <div class="row"><label for="">Số lượng</label>
-              <input type="text" name="soluong" id=""></div>
-              <div class="row"><label for="">Mô tả</label>
-              <textarea name="mota">
+              @csrf
+              <div class="row">
+                <div class="col-12">
+                  <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">{{ isset($product) ? 'Form Edit product' : 'Form plus product' }}</h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <label for="item_code">Mã sản phẩm</label>
+                          <input type="text" class="form-control" id="item_code" name="masp" value="{{ isset($product) ? $product->masp : '' }}">
+                        </div>
+                        <div class="col">
+                          <label for="productname">Tên sản phẩm</label>
+                          <input type="text" class="form-control" id="productname" name="tensp" value="{{ isset($product) ? $product->tensp : '' }}">
+                        </div>
+                        <div class="col">
+                          <label for="productname">Số lượng</label>
+                          <input type="text" class="form-control" id="productname" name="soluong" value="{{ isset($product) ? $product->soluong : '' }}">
+                        </div>
 
-              </textarea></div>
-              <div class="row"><button class="btn btn-primary">Lưu</button></div>
-              
-              
-              
-              
+                        <div class="col">
+                          <label for="productname">Giá</label>
+                          <input type="text" class="form-control" id="productname" name="gia" value="{{ isset($product) ? $product->gia : '' }}">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label for="price">Kiểu sản phẩm</label>
+                          <select name="kieusp">
+                            <option>Hộp</option>
+                            <option>Miếng</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Dài</label>
+                          <input type="text" class="form-control" id="productname" name="dai" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Rộng</label>
+                          <input type="text" class="form-control" id="productname" name="rong" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Cao</label>
+                          <input type="text" class="form-control" id="productname" name="cao" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Sóng</label>
+                          <select class="form-control" name="song">
+                            <option>BC</option>
+                            <option>AC</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Kiểu in</label>
+                          <select class="form-control" name="kieuin">
+                            <option>Flexo</option>
+                            <option>Offset</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Số màu</label>
+                          <input type="number" class="form-control" id="productname" name="somau" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                      
+                        <div class="col">
+                          <label for="price">Dài phôi</label>
+                          <input type="number" class="form-control" id="productname" name="daiphoi" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Rộng phôi</label>
+                          <input type="number" class="form-control" id="productname" name="rongphoi" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+                      </div>
+                      
+                      <div class="row">
+                        <div class="col">
+                          <label for="price">Nắp 1</label>
+                          <input type="number" class="form-control" id="productname" name="nap1" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Cao nắp 1</label>
+                          <input type="number" class="form-control" id="productname" name="caonap1" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Nắp 2</label>
+                          <input type="number" class="form-control" id="productname" name="nap2" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Cao nắp 2</label>
+                          <input type="number" class="form-control" id="productname" name="caonap2" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Nắp 3</label>
+                          <input type="number" class="form-control" id="productname" name="nap3" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Nắp 4</label>
+                          <input type="number" class="form-control" id="productname" name="nap4" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Lằng</label>
+                          <input type="number" class="form-control" id="productname" name="lang" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Bát</label>
+                          <input type="number" class="form-control" id="productname" name="bat" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Lề biên</label>
+                          <input type="number" class="form-control" id="productname" name="lebien" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label for="khogiay">Khổ giấy:</label>
+                          <select class="form-control" name="khogiay">
+                            <option>A4</option>
+                            <option>A3</option>
+                            <option>A2</option>
+                            <option>B4</option>
+                            <option>B3</option>
+                            <option>B2</option>
+                          </select>
+                        </div>
+                          <div class="col">
+                          <label for="price">Trọng lượng</label>
+                          <input type="number" class="form-control" id="productname" name="trongluong" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Diện tích</label>
+                          <input type="number" class="form-control" id="productname" name="dientich" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Đổ bục</label>
+                          <input type="number" class="form-control" id="productname" name="dobuc" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Nén ECT</label>
+                          <input type="number" class="form-control" id="productname" name="nenect" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Nén FCT</label>
+                          <input type="number" class="form-control" id="productname" name="nenfct" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Mặt 3</label>
+                          <input type="number" class="form-control" id="productname" name="mat3" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Sóng 3</label>
+                          <input type="number" class="form-control" id="productname" name="song3" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Mặt 2</label>
+                          <input type="number" class="form-control" id="productname" name="mat2" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Sóng 2</label>
+                          <input type="number" class="form-control" id="productname" name="song2" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Mặt 1</label>
+                          <input type="number" class="form-control" id="productname" name="mat1" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Sóng 1</label>
+                          <input type="number" class="form-control" id="productname" name="song1" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Mặt in</label>
+                          <input type="number" class="form-control" id="productname" name="matin" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <label for="price">Chống thấm</label>
+                          <select name="chongtham" id="">
+                            <option >Có</option>
+                            <option >Không</option>
+                          </select>
+                          <!-- <input type="number" class="form-control" id="productname" name="chongtham" value="{{ isset($product) ? $product->productname : '' }}"> -->
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Cán màng</label>
+                          <input type="number" class="form-control" id="productname" name="canmang" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Bồi</label>
+                          <input type="number" class="form-control" id="productname" name="boi" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Chạp</label>
+                          <input type="number" class="form-control" id="productname" name="chap" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Bế</label>
+                          <input type="number" class="form-control" id="productname" name="be" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Dán</label>
+                          <input type="number" class="form-control" id="productname" name="dan" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Ghim</label>
+                          <input type="number" class="form-control" id="productname" name="ghim" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Bó cột</label>
+                          <input type="number" class="form-control" id="productname" name="bocot" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Quấn màng</label>
+                          <input type="number" class="form-control" id="productname" name="quanmang" value="{{ isset($product) ? $product->productname : '' }}">
+                        </div>
+
+                        <div class="col">
+                          <label for="price">Ghi chú</label>
+                          <textarea name="ghichu" class="form-control">
+
+                          </textarea>
+                        </div>
+                      </div>
+
+                      
+
+
+                      
+
+                      
+
+                    
+                      </div>  <!--  end card body -->
+
+                  
+
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Save</button>
+                      <button type="button" class="btn btn-warning" id="cancel">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Mã sản phẩm</th>
-                    <th>Mô tả sản phẩm</th>
+                    <th>Mã SP</th>
+                    <th>Tên SP</th>
+                    <th>Kết cấu</th>
                     <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Thành tiền</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -89,9 +350,12 @@
                   @foreach ($sanphams as $row)
           <tr>
           <th>{{ $no++ }}</th>
-          <td>{{ $row->masanpham }}</td>
-          <td>{{ $row->mota }}</td>
+          <td>{{ $row->masp }}</td>
+          <td>{{ $row->tensp }}</td>
+          <td>{{ $row->ketcau }}</td>
           <td>{{ $row->soluong }}</td>
+          <td>{{ $row->gia }}</td>
+          <td>{{ $row->soluong * $row->gia }}</td>
           <td>
             <button class="btn btn-success" 
             id="cauhinhsp"
@@ -140,10 +404,15 @@
 @push('scripts')
   <script>
     const themspbt = document.querySelector('#themsp');
+    const cancelbt = document.querySelector('#cancel');
     const formsp = document.querySelector('#formsanpham');
     themspbt.addEventListener('click', function(e){
     console.log("EEEEEEEEEE");
     formsp.classList.remove('hide');
+    })
+
+    cancelbt.addEventListener('click', function(){
+    formsp.classList.add('hide');
     })
   </script>
 

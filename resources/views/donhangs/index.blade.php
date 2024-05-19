@@ -14,11 +14,10 @@
           <thead>
             <tr>
               <th>No</th>
-              <th>Mã đơn hàng</th>
-              <th>Số lượng</th>
-              <th>Loại đơn hàng</th>
+              <th>Ten KH</th>
               <th>Ngày giao hàng</th>
               <th>Trạng thái</th>
+              <th>Ngày tạo</th>
               <th>Action</th>                            
             </tr>
           </thead>
@@ -38,11 +37,10 @@
         ajax: "{{route('donhangs')}}",
         columns: [
           {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-          {data: 'madonhang', name: 'madonhang'},
-          {data: 'soluong', name: 'soluong'},
-          {data: 'loaidonhang', name: 'loaidonhang'},
+          {data: 'tenkh', name: 'tenkh'},
           {data: 'ngaygiaohang', name: 'ngaygiaohang'},
           {data: 'trangthai', name: 'trangthai'},
+          {data: 'created_at', name: 'created_at'},
           {data: 'action', name: 'action'},
         ]
       });

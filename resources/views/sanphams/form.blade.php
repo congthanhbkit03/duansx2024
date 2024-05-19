@@ -69,13 +69,7 @@
               <input type="number" class="form-control" id="productname" name="somau" value="{{ isset($product) ? $product->productname : '' }}">
             </div>
 
-            <div class="form-group">
-              <label for="price">Ghi chú</label>
-              <textarea name="ghichu" class="form-control">
-
-              </textarea>
-            </div>
-
+           
             <div class="form-group">
               <label for="price">Dài phôi</label>
               <input type="number" class="form-control" id="productname" name="daiphoi" value="{{ isset($product) ? $product->productname : '' }}">
@@ -252,7 +246,13 @@
               <input type="number" class="form-control" id="productname" name="quanmang" value="{{ isset($product) ? $product->productname : '' }}">
             </div>
 
-           
+            <div class="form-group">
+              <label for="price">Ghi chú</label>
+              <textarea name="ghichu" class="form-control">
+
+              </textarea>
+            </div>
+
            
             </div>  <!--  end card body -->
 

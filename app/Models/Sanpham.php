@@ -61,6 +61,10 @@ class Sanpham extends Model
         'quanmang',
         'trangthai',
         'congdoan',
-        'donhang_id'
+        'donhang_id',
+        'mota',
+        'ketcau',
+        'gia',
+        'soluong'
     ];
 }
