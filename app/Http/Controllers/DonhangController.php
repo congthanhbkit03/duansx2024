@@ -58,9 +58,11 @@ class DonhangController extends Controller
             'trangthai' => 'Chưa sản xuất'
         ];
 
-        Donhang::create($data);
+        $newdh = Donhang::create($data);
 
-        return redirect()->route('donhangs');
+        //chuyen sang don hang moi vua duoc tao
+        // return redirect()->route('donhangs');
+        return redirect()->route('donhangs.show', $newdh->id);
     }
 
     public function themkhachhang(Request $request)
@@ -110,7 +112,7 @@ class DonhangController extends Controller
         $data = [
 
             'tensp' => $request->tensp,
-            'masp' => $request->masp,
+            // 'masp' => $request->masp,
             'kieusp' => $request->kieusp,
             'dai' => $request->dai,
             'rong' => $request->rong,

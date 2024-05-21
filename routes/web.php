@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\CauhinhController;
 use App\Http\Controllers\congdoanController;
 use App\Http\Controllers\DonhangController;
 use App\Http\Controllers\KhachhangController;
@@ -118,5 +119,11 @@ Route::middleware('auth')->group(function () {
         Route::get('delete/{id}', 'delete')->name('sanphams.delete');
 
         Route::get('{id}/congdoan', 'getCongdoan')->name('sanphams.congdoan');
+    });
+
+    Route::controller(CauhinhController::class)->prefix('cauhinhs')->group(function () {
+        Route::get('cauhinhs/{key}', 'getValueByKey')->name('getcauhinh'); //cho ben ngoai su dung
+        Route::get('bu', 'getBu')->name('cauhinhs.form');
+        Route::post('bu', 'saveBu')->name('cauhinhs.save');
     });
 });

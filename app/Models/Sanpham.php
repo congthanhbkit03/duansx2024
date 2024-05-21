@@ -17,7 +17,7 @@ class Sanpham extends Model
         // 'donhang_id',
         // 'trangthai'
         'tensp',
-        'masp',
+        // 'masp',
         'kieusp',
         'dai',
         'rong',

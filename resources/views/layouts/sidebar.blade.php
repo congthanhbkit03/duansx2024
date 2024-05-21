@@ -124,6 +124,12 @@
                         Kho
                     </a>
                 @endif
+
+                <div class="sb-sidenav-menu-heading">Cấu hình</div>
+                <a class="nav-link" href={{ route('cauhinhs.form') }}>
+                        <div class="sb-nav-link-icon"><i class="fa fa-config"></i></div>
+                        Thiết lập bù sóng
+                    </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">
