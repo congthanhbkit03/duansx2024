@@ -10,7 +10,7 @@ class Donhang extends Model
     use HasFactory;
 
     protected $fillable = [
-        // 'madonhang',
+        'madonhang',
         // 'soluong',
         // 'loaidonhang',
         'ngaygiaohang',

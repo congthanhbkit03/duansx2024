@@ -100,7 +100,9 @@ class SanphamController extends Controller
             'soluong' => $request->soluong
         ];
 
-        Sanpham::create($data);
+        $newsp = Sanpham::create($data);
+        $newsp->masp = "PO" . sprintf("%07d", $newsp->id);
+        $newsp->save();
 
         return redirect()->route('sanphams');
     }

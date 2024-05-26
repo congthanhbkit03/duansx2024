@@ -419,7 +419,7 @@
                                 @foreach ($sanphams as $row)
                                     <tr>
                                         <th>{{ $no++ }}</th>
-                                        <th>{{ $row->id }}</th>
+                                        <th>{{ $row->masp }}</th>
                                         <td>{{ $row->tensp }}</td>
                                         <td>{{ $row->ketcau }}</td>
                                         <td>{{ $row->soluong }}</td>

@@ -10,7 +10,7 @@ class Khachhang extends Model
     use HasFactory;
 
     protected $fillable = [
-        'makh',
+        // 'makh',
         'tenkh',
         'lienhe',
         'sdt',

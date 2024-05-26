@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 15, 2024 at 10:10 AM
+-- Generation Time: May 26, 2024 at 12:32 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -41,6 +41,27 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (2, 'May tinh', '2024-04-28 20:12:16', '2024-04-28 20:12:16'),
 (3, 'Gia dung', '2024-04-28 20:12:23', '2024-04-28 20:12:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cauhinhs`
+--
+
+CREATE TABLE `cauhinhs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cauhinhs`
+--
+
+INSERT INTO `cauhinhs` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
+(1, 'bu', '{\"song1\": \"3\",\r\n\r\n\"song2\": \"5\",  \r\n\r\n\"song3\":\"9\"}', NULL, '2024-05-20 04:06:09');
 
 -- --------------------------------------------------------
 
@@ -91,9 +112,10 @@ INSERT INTO `congdoans` (`id`, `tencongdoan`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `donhangs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `madonhang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `soluong` int(11) NOT NULL,
-  `loaidonhang` enum('Đầy đủ','Không đầy đủ') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `madonhang` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `khachhang_id` int(11) NOT NULL,
+  `soluong` int(11) DEFAULT NULL,
+  `loaidonhang` enum('Đầy đủ','Không đầy đủ') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ngaygiaohang` date NOT NULL,
   `trangthai` enum('Chưa sản xuất','Đang sản xuất','Đã hoàn tất','Đã hủy') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -104,9 +126,10 @@ CREATE TABLE `donhangs` (
 -- Dumping data for table `donhangs`
 --
 
-INSERT INTO `donhangs` (`id`, `madonhang`, `soluong`, `loaidonhang`, `ngaygiaohang`, `trangthai`, `created_at`, `updated_at`) VALUES
-(1, '11111', 11, 'Đầy đủ', '2024-09-09', 'Chưa sản xuất', '2024-05-08 23:58:21', '2024-05-08 23:58:21'),
-(2, '2222222', 222, 'Đầy đủ', '2024-05-26', 'Chưa sản xuất', '2024-05-09 00:16:25', '2024-05-09 00:16:25');
+INSERT INTO `donhangs` (`id`, `madonhang`, `khachhang_id`, `soluong`, `loaidonhang`, `ngaygiaohang`, `trangthai`, `created_at`, `updated_at`) VALUES
+(14, 'SO000014', 6, NULL, NULL, '2024-06-07', 'Chưa sản xuất', '2024-05-24 02:29:40', '2024-05-24 02:29:40'),
+(15, 'SO000015', 8, NULL, NULL, '2024-05-23', 'Chưa sản xuất', '2024-05-24 02:30:01', '2024-05-24 02:30:01'),
+(16, 'SO000016', 16, NULL, NULL, '2024-05-24', 'Chưa sản xuất', '2024-05-26 03:31:01', '2024-05-26 03:31:02');
 
 -- --------------------------------------------------------
 
@@ -132,21 +155,21 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `khachhangs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `makh` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `makh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tenkh` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lienhe` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sdt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `diachi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `masothue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `giaohang1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sdt1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `km1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `giaohang2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sdt2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `km2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ghichu` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nguoitao` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lienhe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sdt` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `diachi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `masothue` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `giaohang1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sdt1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `km1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `giaohang2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sdt2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `km2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mang` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ghichu` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nguoitao` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -157,7 +180,19 @@ CREATE TABLE `khachhangs` (
 
 INSERT INTO `khachhangs` (`id`, `makh`, `tenkh`, `lienhe`, `sdt`, `diachi`, `masothue`, `giaohang1`, `sdt1`, `km1`, `giaohang2`, `sdt2`, `km2`, `mang`, `ghichu`, `nguoitao`, `created_at`, `updated_at`) VALUES
 (1, 'KH0001', 'Nguyen Van', '123 Trang Hung Dao', '05523234234234', '99 Tran Hung Dao', '989888324234', 'Khog', 'Khong', 'Khong', 'Khog', 'Khoang', '0', '???', 'hehehe', '', '2024-05-13 08:48:37', '2024-05-13 08:48:37'),
-(2, 'KH0002', 'Sony', '543 Nam Kỳ', '0244334389', '423 Tran Hung Dao', '323423432', 'khong biet', 'ko', '0', 'Khong', '090099', '0', '???', 'Khong co chi', '', '2024-05-13 08:49:56', '2024-05-13 08:49:56');
+(2, 'KH0002', 'Sony', '543 Nam Kỳ', '0244334389', '423 Tran Hung Dao', '323423432', 'khong biet', 'ko', '0', 'Khong', '090099', '0', '???', 'Khong co chi', '', '2024-05-13 08:49:56', '2024-05-13 08:49:56'),
+(3, 'KH00004', 'Cong ty ABCDEF', 'Ms Van', '0909090909', '99 Le Loi', '09232343423', '0000', '22222', '090909090', '34234', '09304234', '33', '???', 'No', '', '2024-05-17 01:51:41', '2024-05-17 01:51:41'),
+(4, 'KH004', 'Cong ty Samsung', '3234', '234234', '4324', '23423', '23423', '23423', '234234', '2343243', '23432', '3423', '???', '23423', '', '2024-05-17 03:35:16', '2024-05-17 03:35:16'),
+(5, 'Cong ty MNP', '234', '34234', '3423', '3234', '3223', '325242', '3252', '23233', '352353', '32325', '325rr', '???', '23523', '', '2024-05-17 03:35:43', '2024-05-17 03:35:43'),
+(6, '77', '777777', '77', '77', '77', '77', '77', '77', '77', '77', '77', '77', '???', '777777777', '', '2024-05-18 08:37:08', '2024-05-18 08:37:08'),
+(7, '888', '2222222', '88', '88', '88', '88', '88', '88', '88', '88', '88', '88', '???', '888888888888', '', '2024-05-18 08:39:03', '2024-05-18 08:39:03'),
+(8, '888', '8888888888888', '8888888888', '88', '88', '88', '88', '88', '88', '88', '88', '88', '???', '888888888888', '', '2024-05-18 08:41:59', '2024-05-18 08:41:59'),
+(9, '99', '999999999', '999', '99999999', '99999', '999999', '9', '9', '9', '9', '9', '9', '???', '99999999', '', '2024-05-18 08:43:15', '2024-05-18 08:43:15'),
+(10, 'MMMM', 'Cty Nguyen Khang', '999', '008908', '99 Hung vuong', '678678', '564', '45654', '45645', '46546', '54645', '45654', '???', '45654', '', '2024-05-19 01:36:54', '2024-05-19 01:36:54'),
+(11, '55', '5555555', '55', '555', '55', '55', '555', '555', '5', '5', '5', '55', '???', '55', '', '2024-05-19 01:41:46', '2024-05-19 01:41:46'),
+(14, 'KH00014', 'Thượng đế', 'ượng đế', 'ượng đế', 'ượng đếượng đếượng đếượng đế', '1111', '32', '34234', '23432', '23432', '23423', '234234', '???', '32352', '', '2024-05-26 01:50:24', '2024-05-26 02:55:34'),
+(15, 'KH00015', 'MMabu', 'Tran Thi Binh', '09090909', '99 Hung Vuong', '0909090909', NULL, NULL, NULL, NULL, NULL, NULL, '???', NULL, '', '2024-05-26 03:28:21', '2024-05-26 03:28:21'),
+(16, 'KH00016', 'Songoku', '99 Le Loi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '???', NULL, '', '2024-05-26 03:30:51', '2024-05-26 03:30:51');
 
 -- --------------------------------------------------------
 
@@ -188,7 +223,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2024_05_10_153444_create_congdoans_table', 5),
 (11, '2024_05_12_065421_create_cauhinhsxes_table', 6),
 (12, '2024_05_13_142640_create_khachhangs_table', 7),
-(13, '2024_05_14_085139_add-columns-to-sanpham', 8);
+(13, '2024_05_14_085139_add-columns-to-sanpham', 8),
+(14, '2024_05_20_072526_create_cauhinhs_table', 9);
 
 -- --------------------------------------------------------
 
@@ -377,7 +413,8 @@ INSERT INTO `products` (`id`, `item_code`, `productname`, `category`, `price`, `
 (62, 'P050', 'Widget H', 'Tools', '264.99', NULL, NULL),
 (63, NULL, NULL, NULL, NULL, '2024-05-14 02:24:22', '2024-05-14 02:24:22'),
 (64, NULL, NULL, NULL, NULL, '2024-05-14 02:25:28', '2024-05-14 02:25:28'),
-(65, NULL, NULL, NULL, NULL, '2024-05-14 02:26:21', '2024-05-14 02:26:21');
+(65, NULL, NULL, NULL, NULL, '2024-05-14 02:26:21', '2024-05-14 02:26:21'),
+(66, '434', '34534', NULL, '34534', '2024-05-17 01:05:42', '2024-05-17 01:05:42');
 
 -- --------------------------------------------------------
 
@@ -387,7 +424,7 @@ INSERT INTO `products` (`id`, `item_code`, `productname`, `category`, `price`, `
 
 CREATE TABLE `sanphams` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `masp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `masp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `congdoan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `donhang_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `trangthai` enum('Chưa sản xuất','Đang sản xuất','Đã hoàn tất','Đã hủy') COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -434,16 +471,31 @@ CREATE TABLE `sanphams` (
   `dan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ghim` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bocot` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `quanmang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `quanmang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ketcau` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mota` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gia` int(11) NOT NULL,
+  `soluong` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `sanphams`
 --
 
-INSERT INTO `sanphams` (`id`, `masp`, `congdoan`, `donhang_id`, `trangthai`, `created_at`, `updated_at`, `tensp`, `kieusp`, `dai`, `rong`, `cao`, `song`, `kieuin`, `somau`, `ghichu`, `daiphoi`, `rongphoi`, `nap1`, `caonap1`, `nap2`, `caonap2`, `nap3`, `nap4`, `lang`, `bat`, `lebien`, `khogiay`, `trongluong`, `dientich`, `dobuc`, `nenect`, `nenfct`, `mat3`, `song3`, `mat2`, `song2`, `mat1`, `song1`, `matin`, `chongtham`, `canmang`, `boi`, `chap`, `be`, `dan`, `ghim`, `bocot`, `quanmang`) VALUES
-(12, 'SP1110', '', '9090909', '', '2024-05-14 06:02:53', '2024-05-14 06:02:53', 'Bìa carton cho KH ABC', 'Miếng', '1', '8', '8', 'BC', 'Flexo', '1', '1111', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'A4', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'Có', '1', '1', '1', '1', '1', '1', '11', '1'),
-(13, 'SP00002', '', 'DH002', '', '2024-05-14 23:43:45', '2024-05-14 23:43:45', 'Bìa in cty thuốc xổ sán', 'Hộp', '12', '12', '12', 'AC', 'Offset', '5', 'In thu xem khong biet', '12', '12', '12', '12', '12', '12', '3', '3', '4', '4', '5', 'A4', '2', '1', '3', '1', '1', '3', '3', '2', '2', '1', '1', '1', 'Có', '1', '1', '0', '1', '1', '1', '1', '2');
+INSERT INTO `sanphams` (`id`, `masp`, `congdoan`, `donhang_id`, `trangthai`, `created_at`, `updated_at`, `tensp`, `kieusp`, `dai`, `rong`, `cao`, `song`, `kieuin`, `somau`, `ghichu`, `daiphoi`, `rongphoi`, `nap1`, `caonap1`, `nap2`, `caonap2`, `nap3`, `nap4`, `lang`, `bat`, `lebien`, `khogiay`, `trongluong`, `dientich`, `dobuc`, `nenect`, `nenfct`, `mat3`, `song3`, `mat2`, `song2`, `mat1`, `song1`, `matin`, `chongtham`, `canmang`, `boi`, `chap`, `be`, `dan`, `ghim`, `bocot`, `quanmang`, `ketcau`, `mota`, `gia`, `soluong`) VALUES
+(12, 'SP1110', '', '9090909', '', '2024-05-14 06:02:53', '2024-05-14 06:02:53', 'Bìa carton cho KH ABC', 'Miếng', '1', '8', '8', 'BC', 'Flexo', '1', '1111', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'A4', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'Có', '1', '1', '1', '1', '1', '1', '11', '1', NULL, '', 0, 0),
+(13, 'SP00002', '', 'DH002', '', '2024-05-14 23:43:45', '2024-05-14 23:43:45', 'Bìa in cty thuốc xổ sán', 'Hộp', '12', '12', '12', 'AC', 'Offset', '5', 'In thu xem khong biet', '12', '12', '12', '12', '12', '12', '3', '3', '4', '4', '5', 'A4', '2', '1', '3', '1', '1', '3', '3', '2', '2', '1', '1', '1', 'Có', '1', '1', '0', '1', '1', '1', '1', '2', NULL, '', 0, 0),
+(14, 'SP00003', '', 'DO000003', '', '2024-05-15 02:43:48', '2024-05-15 02:43:48', 'Bà ba con ga', 'Hộp', '12', '12', '12', 'BC', 'Flexo', '3', '3333', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', 'A4', '3', '4', '4', '3', '2', '2', '2', '2', '2', '2', '1', '2', 'Có', '1', '2', '3', '3', '3', '3', '3', '3', ' Hộp-12-12-12-{ BC}-Flexo', ' Kiểu: Hộp,\n        Kích thước: 12x\n            12x\n                12,\n                    Sóng: { BC},\n                    In: Flexo', 0, 0),
+(15, 'SP0004', '', 'Hihihi', '', '2024-05-15 02:49:45', '2024-05-15 02:49:45', 'san phẩm 4', 'Miếng', '9', '9', '9', 'AC', 'Flexo', '3', '44444', '3', '4', '4', '4', '4', '4', '4', '4', '4', '4', '3', 'A4', '2', '2', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', 'Có', '4', '4', '4', '4', '4', '4', '4', '4', ' Miếng-9-9-9-{ AC}-Flexo', ' Kiểu: Miếng, Kích thước: 9x9x9, Sóng: { AC}, In: Flexo', 0, 0),
+(16, 'SP00005', '', 'XXX', '', '2024-05-15 02:52:50', '2024-05-15 02:52:50', 'san pham thu 5', 'Miếng', '9', '8', '7', 'AC', 'Offset', '2', '4444444', '1', '1', '0', '2', '4', '4', '4', '4', '4', '4', '4', 'A4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '44', 'Không', '4', '4', '4', '4', '4', '4', '4', '4', ' Miếng-9-8-7-AC-Offset', ' Kiểu: Miếng, Kích thước: 9x8x7, Sóng: AC, In: Offset', 0, 0),
+(17, 'SP2332423', '', '2', '', '2024-05-16 23:55:09', '2024-05-16 23:55:09', 'Thùng mì tơm', 'Hộp', '12', '12', '12', 'BC', 'Flexo', '3', '44444', '3', '3', '3', '3', '3', '3', '2', '3', '3', '3', '4', 'A4', '44', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', 'Có', '4', '4', '4', '4', '4', '4', '4', '4', ' Hộp-12-12-12-BC-Flexo', ' Kiểu: Hộp, Kích thước: 12x12x12, Sóng: BC, In: Flexo', 3000, 100),
+(18, 'SP333', '', '2', '', '2024-05-16 23:58:03', '2024-05-16 23:58:03', 'Thùng ABC', 'Hộp', '23', '45', '63', 'BC', 'Flexo', '52', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', 'A4', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', 'Có', '5', '5', '5', '5', '5', '5', '5', '5', ' Hộp-23-45-63-BC-Flexo', ' Kiểu: Hộp, Kích thước: 23x45x63, Sóng: BC, In: Flexo', 5000, 24),
+(19, 'rư', '', '3', '', '2024-05-19 01:07:22', '2024-05-19 01:07:22', 'rử', 'Hộp', '3', '3', '3', 'BC', 'Flexo', '3', '333333', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', 'A4', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', 'Có', '3', '3', '3', '3', '3', '3', '3', '3', ' Hộp-3-3-3-BC-Flexo', ' Kiểu: Hộp, Kích thước: 3x3x3, Sóng: BC, In: Flexo', 5666, 4),
+(20, '23423', '', '4', '', '2024-05-19 02:03:40', '2024-05-19 02:03:40', '23423', 'Hộp', '34', '34', '34', 'BC', 'Flexo', '34', '444', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', 'A4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', 'Có', '4', '4', '4', '4', '4', '4', '4', '4', ' Hộp-34-34-34-BC-Flexo', ' Kiểu: Hộp, Kích thước: 34x34x34, Sóng: BC, In: Flexo', 43, 34),
+(21, NULL, '', '8', '', '2024-05-20 19:16:58', '2024-05-20 19:16:58', 'Thung mi tom', 'Hộp', '10', '5', '7', 'BD', 'Flexo', '2', '222222', '65', '17', '2', '2', '2', '2', '2', '2', '2', '2', '2', 'A4', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', 'Có', '2', '2', '2', '2', '2', '2', '2', '2', ' Hộp-10-5-7-BD-Flexo', ' Kiểu: Hộp, Kích thước: 10x5x7, Sóng: BD, In: Flexo', 234234, 98),
+(22, NULL, '', '15', '', '2024-05-24 02:46:47', '2024-05-24 02:46:47', 'SP miếng bìa bao', 'Hộp', '8', '8', '8', 'C', 'Flexo', '3', '23234f', '67', '19', '8', '8', '8', '8', '8', '8', '8', '8', '8', 'A4', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8', 'Có', '8', '8', '8', '8', '8', '8', '8', '8', ' Hộp-8-8-8-C-Flexo', ' Kiểu: Hộp, Kích thước: 8x8x8, Sóng: C, In: Flexo', 4000, 200),
+(23, 'PO0000023', '', '15', '', '2024-05-24 02:50:20', '2024-05-24 02:50:20', '323lkjsfds', 'Hộp', '26', '6', '6', 'B', 'Flexo', '3', '33333333333', '99', '15', '3', '3', '3', '3', '3', '3', '3', '3', '3', 'A4', '3', '3', '3', '3', '3', '33', '1', '3', '3', '3', '3', '3', 'Có', '3', '3', '3', '3', '3', '3', '3', '3', ' Hộp-26-6-6-B-Flexo', ' Kiểu: Hộp, Kích thước: 26x6x6, Sóng: B, In: Flexo', 234, 23),
+(24, 'PO0000024', '', '15', '', '2024-05-24 02:51:24', '2024-05-24 02:51:24', 'Thùng bao thiết bị tủ lạnh', 'Hộp', '6', '7', '7', 'B', 'Flexo', '3', '66666', '61', '17', '6', '6', '6', '6', '6', '6', '6', '6', '6', 'A4', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6', 'Có', '6', '6', '6', '6', '6', '6', '6', '6', ' Hộp-6-7-7-B-Flexo', ' Kiểu: Hộp, Kích thước: 6x7x7, Sóng: B, In: Flexo', 200, 1000);
 
 -- --------------------------------------------------------
 
@@ -551,6 +603,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cauhinhs`
+--
+ALTER TABLE `cauhinhs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cauhinhsxes`
 --
 ALTER TABLE `cauhinhsxes`
@@ -637,6 +695,12 @@ ALTER TABLE `categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `cauhinhs`
+--
+ALTER TABLE `cauhinhs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `cauhinhsxes`
 --
 ALTER TABLE `cauhinhsxes`
@@ -652,7 +716,7 @@ ALTER TABLE `congdoans`
 -- AUTO_INCREMENT for table `donhangs`
 --
 ALTER TABLE `donhangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -664,13 +728,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `khachhangs`
 --
 ALTER TABLE `khachhangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -688,13 +752,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `sanphams`
 --
 ALTER TABLE `sanphams`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`

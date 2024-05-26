@@ -1,3 +1,4 @@
+<!-- Tra icon o day: https://fontawesome.com/v6/icons -->
 <div id="layoutSidenav_nav">
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
@@ -20,9 +21,21 @@
                     </nav>
                 </div>
 
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                    Người dùng
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseUser" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{route('congdoan')}}">Danh sách</a>
+                        <a class="nav-link" href="{{route('congdoan.add')}}">Thêm mới</a>
+                    </nav>
+                </div>
+
                 <!-- Khach hang -->
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKhachhangs" aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-person"></i></div>
                     Khách hàng
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -36,7 +49,7 @@
 
                 <!-- Đơn hàng -->
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDonhangs" aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill"></i></div>
                     Đơn hàng
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -48,7 +61,8 @@
                 </div>
 
                 <!-- San pham -->
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link" href="{{route('sanphams')}}"><i class="fa-solid fa-star"></i> Sản phẩm</a>
+                <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Sản phẩm
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -58,7 +72,7 @@
                         <a class="nav-link" href="{{route('sanphams')}}">Danh sách</a>
                         <a class="nav-link" href="{{route('sanphams.add')}}">Thêm mới Sản phẩm</a>
                     </nav>
-                </div>
+                </div> -->
                 <!-- Menu 3 cap - neu dung thi su dung template nay -->
                 <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -130,6 +144,8 @@
                         <div class="sb-nav-link-icon"><i class="fa fa-config"></i></div>
                         Thiết lập bù sóng
                     </a>
+
+
             </div>
         </div>
         <div class="sb-sidenav-footer">

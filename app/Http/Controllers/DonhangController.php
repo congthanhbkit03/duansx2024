@@ -59,6 +59,8 @@ class DonhangController extends Controller
         ];
 
         $newdh = Donhang::create($data);
+        $newdh->madonhang = "SO" . sprintf("%06d", $newdh->id);
+        $newdh->save();
 
         //chuyen sang don hang moi vua duoc tao
         // return redirect()->route('donhangs');
@@ -67,8 +69,13 @@ class DonhangController extends Controller
 
     public function themkhachhang(Request $request)
     {
+        $validated = $request->validate([
+            // 'title' => 'required|unique:posts|max:255',
+            'tenkh' => 'required',
+        ]);
+
         $data = [
-            'makh' => $request->makh,
+            // 'makh' => $request->makh,
             'tenkh' => $request->tenkh,
             'lienhe' => $request->lienhe,
             'sdt' => $request->sdt,
@@ -85,9 +92,12 @@ class DonhangController extends Controller
             'mang' => '???'
         ];
 
-        $kh = Khachhang::create($data);
+        $newkh = Khachhang::create($data);
+        $newkh->makh = "KH" . sprintf("%05d", $newkh->id);
+        $newkh->save();
 
-        return response()->json($kh);
+
+        return response()->json($newkh);
     }
 
     public function show($id)
@@ -163,7 +173,9 @@ class DonhangController extends Controller
             'soluong' => $request->soluong
         ];
 
-        Sanpham::create($data);
+        $newsp = Sanpham::create($data);
+        $newsp->masp = "SP" . sprintf("%07d", $newsp->id);
+        $newsp->save();
 
         return redirect()->route('donhangs.show', $id);
     }

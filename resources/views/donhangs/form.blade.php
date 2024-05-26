@@ -133,7 +133,7 @@
     <div class="modal fade" id="themkhachang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <form action="{{ route('donhangs.themkhachhang.save') }}" method="post">
             @csrf
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Thêm khách hàng mới: <span id="idsp"></span>
@@ -145,37 +145,31 @@
 
                         <div class="row">
                             <div class="col">
-                                <div class="form-group">
-                                    <label for="item_code">Mã Khách hàng</label>
-                                    <input type="text" class="form-control" id="makh" name="makh">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="khachhangname">Tên Khách hàng</label>
-                                    <input type="text" class="form-control" id="tenkh" name="tenkh">
-                                </div>
+                                <label for="khachhangname">Tên Khách hàng</label>
+                                <input type="text" class="form-control" id="tenkh" name="tenkh">
                             </div>
+                               
                             <div class="col">
-                                <div class="form-group">
                                     <label for="price">Liên hệ</label>
                                     <input type="text" class="form-control" id="lienhe" name="lienhe">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="price">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="sdt" name="sdt">
-                                </div>
                             </div>
+
                             <div class="col">
-                                <div class="form-group">
+                                <label for="price">Số điện thoại</label>
+                                <input type="text" class="form-control" id="sdt" name="sdt">
+                            </div>
+                        </div>
+                           
+                        <div class="row">
+                                <div class="col">
                                     <label for="price">Địa chỉ</label>
                                     <input type="text" class="form-control" id="diachi" name="diachi">
                                 </div>
-
-                                <div class="form-group">
+                        </div>
+                        <div class="row">
+                            <div class="col">
                                     <label for="price">Mã số thuế</label>
                                     <input type="text" class="form-control" id="masothue" name="masothue">
-                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -295,7 +289,7 @@
         const saveBt = document.querySelector('#save')
         saveBt.addEventListener('click', function() {
             axios.post('{{ route('donhangs.themkhachhang.save') }}', {
-                    makh: document.querySelector('#makh').value,
+                    // makh: document.querySelector('#makh').value,
                     tenkh: document.querySelector('#tenkh').value,
                     lienhe: document.querySelector('#lienhe').value,
                     sdt: document.querySelector('#sdt').value,
@@ -315,7 +309,7 @@
                     //set khachhang_id voi ma kh vua tao
                     document.querySelector('#khachhang_id').value = data.data.id
                     //xoa du lieu trong form
-                    document.querySelector('#makh').value = ""
+                    // document.querySelector('#makh').value = ""
                     document.querySelector('#tenkh').value = ""
                     document.querySelector('#lienhe').value = ""
                     document.querySelector('#sdt').value = ""

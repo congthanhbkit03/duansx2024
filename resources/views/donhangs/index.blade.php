@@ -14,7 +14,8 @@
           <thead>
             <tr>
               <th>No</th>
-              <th>Ten KH</th>
+              <th>Mã Đơn</th>
+              <th>Khách hàng</th>
               <th>Ngày giao hàng</th>
               <th>Trạng thái</th>
               <th>Ngày tạo</th>
@@ -37,6 +38,7 @@
         ajax: "{{route('donhangs')}}",
         columns: [
           {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+          {data: 'madonhang', name: 'madonhang'},
           {data: 'tenkh', name: 'tenkh'},
           {data: 'ngaygiaohang', name: 'ngaygiaohang'},
           {data: 'trangthai', name: 'trangthai'},

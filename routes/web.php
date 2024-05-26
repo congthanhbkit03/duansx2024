@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(KhachhangController::class)->prefix('khachhangs')->group(function () {
         Route::get('', 'index')->name('khachhangs');
+        Route::get('view/{id}', 'view')->name('khachhangs.details');
         Route::get('add', 'add')->name('khachhangs.add');
         Route::post('add', 'save')->name('khachhangs.save');
         Route::get('edit/{id}', 'edit')->name('khachhangs.edit');

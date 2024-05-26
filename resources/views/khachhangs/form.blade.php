@@ -14,56 +14,63 @@
           <div class="card-body">
             <div class="row">
               <div class="col">
-              <div class="form-group">
-              <label for="item_code">Mã Khách hàng</label>
-              <input type="text" class="form-control" id="item_code" name="makh" value="{{ isset($khachhang) ? $khachhang->item_code : '' }}">
-            </div>
-
-            <div class="form-group">
-              <label for="khachhangname">Tên Khách hàng</label>
-              <input type="text" class="form-control" id="khachhangname" name="tenkh" value="{{ isset($khachhang) ? $khachhang->khachhangname : '' }}">
-            </div>
+                  <!-- <div class="form-group">
+                  <label for="item_code">Mã Khách hàng</label>
+                  <input type="text" class="form-control" id="item_code" name="makh" value="{{ isset($khachhang) ? $khachhang->item_code : '' }}">
+                </div> -->
+                @error('tenkh')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+                <div class="form-group">
+                  <label for="khachhangname">Tên Khách hàng</label>
+                  <input type="text" class="form-control" id="khachhangname" name="tenkh" value="{{ isset($khachhang) ? $khachhang->tenkh : '' }}">
+                </div>
               </div>
               <div class="col">
               <div class="form-group">
               <label for="price">Liên hệ</label>
-              <input type="text" class="form-control" id="price" name="lienhe" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
+              <input type="text" class="form-control" id="price" name="lienhe" value="{{ isset($khachhang) ? $khachhang->lienhe : '' }}">
             </div>
-
-            <div class="form-group">
-              <label for="price">Số điện thoại</label>
-              <input type="text" class="form-control" id="price" name="sdt" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
-            </div>
+              </div>
+              </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="price">Số điện thoại</label>
+                  <input type="text" class="form-control" id="price" name="sdt" value="{{ isset($khachhang) ? $khachhang->sdt : '' }}">
+                </div>
               </div>
               <div class="col">
               <div class="form-group">
-              <label for="price">Địa chỉ</label>
-              <input type="text" class="form-control" id="price" name="diachi" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
-            </div>
-
-            <div class="form-group">
               <label for="price">Mã số thuế</label>
-              <input type="text" class="form-control" id="price" name="masothue" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
+              <input type="text" class="form-control" id="price" name="masothue" value="{{ isset($khachhang) ? $khachhang->masothue : '' }}">
             </div>
-              </div>
+              
+            </div>
+           
+              
+            </div>
+            <div class="form-group">
+              <label for="price">Địa chỉ</label>
+              <input type="text" class="form-control" id="price" name="diachi" value="{{ isset($khachhang) ? $khachhang->diachi : '' }}">
             </div>
             <div class="row">
               <div class="col">
                 <div class="form-group">
                 <label for="price">Giao hàng 1</label>
-                <input type="text" class="form-control" id="price" name="giaohang1" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
+                <input type="text" class="form-control" id="price" name="giaohang1" value="{{ isset($khachhang) ? $khachhang->giaohang1 : '' }}">
               </div>
               </div>
               <div class="col">
               <div class="form-group">
               <label for="price">Số điện thoại 1</label>
-              <input type="text" class="form-control" id="price" name="sdt1" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
+              <input type="text" class="form-control" id="price" name="sdt1" value="{{ isset($khachhang) ? $khachhang->sdt1 : '' }}">
             </div>
               </div>
            <div class="col">
            <div class="form-group">
               <label for="price">Số km 1</label>
-              <input type="text" class="form-control" id="price" name="km1" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
+              <input type="text" class="form-control" id="price" name="km1" value="{{ isset($khachhang) ? $khachhang->km1 : '' }}">
             </div>
            </div>
 
@@ -72,24 +79,24 @@
               <div class="col">
               <div class="form-group">
               <label for="price">Giao hàng 2</label>
-              <input type="text" class="form-control" id="price" name="giaohang2" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
+              <input type="text" class="form-control" id="price" name="giaohang2" value="{{ isset($khachhang) ? $khachhang->giaohang2 : '' }}">
             </div>
               </div>
               <div class="col"><div class="form-group">
               <label for="price">Số điện thoại 2</label>
-              <input type="text" class="form-control" id="price" name="sdt2" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
+              <input type="text" class="form-control" id="price" name="sdt2" value="{{ isset($khachhang) ? $khachhang->sdt2 : '' }}">
             </div></div>
               <div class="col">
               <div class="form-group">
               <label for="price">Số km 2</label>
-              <input type="text" class="form-control" id="price" name="km2" value="{{ isset($khachhang) ? $khachhang->price : '' }}">
+              <input type="text" class="form-control" id="price" name="km2" value="{{ isset($khachhang) ? $khachhang->km2 : '' }}">
             </div>
               </div>
             </div>           
             
             <div class="form-group">
               <label for="price">Ghi chú</label>
-              <textarea name="ghichu" class="form-control">{{ isset($khachhang) ? $khachhang->price : '' }}</textarea>
+              <textarea name="ghichu" class="form-control">{{ isset($khachhang) ? $khachhang->ghichu : '' }}</textarea>
             </div>
           </div>
           <div class="card-footer">
