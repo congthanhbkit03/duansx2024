@@ -108,6 +108,38 @@ class DonhangController extends Controller
         return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans]);
     }
 
+    public function edit($id)
+    {
+        $donhang = Donhang::find($id);
+        return view('donhangs.form', ['donhang' => $donhang]);
+    }
+
+    public function update($id, Request $request)
+    {
+
+        $data = [
+            // 'madonhang' => $request->madonhang,
+            'ngaygiaohang' => $request->ngaygiaohang,
+            // 'loaidonhang' => $request->loaidonhang,
+            // 'soluong' => $request->soluong,
+            'khachhang_id' => $request->khachhang_id,
+            'trangthai' => 'Chưa sản xuất'
+        ];
+
+        Donhang::create($data);
+
+        Donhang::find($id)->update($data);
+
+        return redirect()->route('donhangs');
+    }
+
+    public function delete($id)
+    {
+        Donhang::find($id)->delete();
+
+        return redirect()->route('donhangs');
+    }
+
     public function themsp(Request $request, $id)
     {
         // $data = [
@@ -179,35 +211,90 @@ class DonhangController extends Controller
 
         return redirect()->route('donhangs.show', $id);
     }
-    public function edit($id)
+
+    public function editsp($id, $sid)
     {
         $donhang = Donhang::find($id);
-        return view('donhangs.form', ['donhang' => $donhang]);
+        $sanphams = Sanpham::where('donhang_id', $id)->get();
+        $congdoans = Congdoan::all();
+        // return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans]);
+        $product = Sanpham::find($sid);
+
+        return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans, 'product' => $product]);
     }
-
-    public function update($id, Request $request)
+    public function updatesp(Request $request, $id, $sid)
     {
+        $sanpham = Sanpham::find($sid);
 
+        $ketcau = " {$request->kieusp}-{$request->dai}-{$request->rong}-{$request->cao}-{$request->song}-{$request->kieuin}";
+        $mota = " Kiểu: {$request->kieusp}, Kích thước: {$request->dai}x{$request->rong}x{$request->cao}, Sóng: {$request->song}, In: {$request->kieuin}";
         $data = [
-            // 'madonhang' => $request->madonhang,
-            'ngaygiaohang' => $request->ngaygiaohang,
-            // 'loaidonhang' => $request->loaidonhang,
-            // 'soluong' => $request->soluong,
-            'khachhang_id' => $request->khachhang_id,
-            'trangthai' => 'Chưa sản xuất'
+
+            'tensp' => $request->tensp,
+            // 'masp' => $request->masp,
+            'kieusp' => $request->kieusp,
+            'dai' => $request->dai,
+            'rong' => $request->rong,
+            'cao' => $request->cao,
+            'song' => $request->song,
+            'kieuin' => $request->kieuin,
+            'somau' => $request->somau,
+            'ghichu' => $request->ghichu,
+            'daiphoi' => $request->daiphoi,
+            'rongphoi' => $request->rongphoi,
+            'nap1' => $request->nap1,
+            'caonap1' => $request->caonap1,
+            'nap2' => $request->nap2,
+            'caonap2' => $request->caonap2,
+            'nap3' => $request->nap3,
+            'nap4' => $request->nap4,
+            'lang' => $request->lang,
+            'bat' => $request->bat,
+            'lebien' => $request->lebien,
+            'khogiay' => $request->khogiay,
+            'trongluong' => $request->trongluong,
+            'dientich' => $request->dientich,
+            'dobuc' => $request->dobuc,
+            'nenect' => $request->nenect,
+            'nenfct' => $request->nenfct,
+            'mat3' => $request->mat3,
+            'song3' => $request->song3,
+            'mat2' => $request->mat2,
+            'song2' => $request->song2,
+            'mat1' => $request->mat1,
+            'song1' => $request->song1,
+            'matin' => $request->matin,
+            'chongtham' => $request->chongtham,
+            'canmang' => $request->canmang,
+            'boi' => $request->boi,
+            'chap' => $request->chap,
+            'be' => $request->be,
+            'dan' => $request->dan,
+            'ghim' => $request->ghim,
+            'bocot' => $request->bocot,
+            'quanmang' => $request->quanmang,
+            'trangthai' => '0',
+            'congdoan' => '',
+            'donhang_id' => $id,
+            'ketcau' => $ketcau,
+            'mota' => $mota,
+            'gia' => $request->gia,
+            'soluong' => $request->soluong
         ];
 
-        Donhang::create($data);
+        // $newsp = Sanpham::create($data);
+        // $newsp->masp = "SP" . sprintf("%07d", $newsp->id);
+        // $newsp->save();
+        $sanpham->update($data);
 
-        Donhang::find($id)->update($data);
-
-        return redirect()->route('donhangs');
+        return redirect()->route('donhangs.show', $id);
     }
 
-    public function delete($id)
+    public function deletesp($id, $sid)
     {
-        Donhang::find($id)->delete();
-
-        return redirect()->route('donhangs');
+        Sanpham::find($sid)->delete();
+        return redirect()->route('donhangs.show', $id);
     }
 }
+
+

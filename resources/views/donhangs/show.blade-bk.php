@@ -50,14 +50,14 @@
                         <div class="col-10">
                             <h6 class="m-0 font-weight-bold text-primary">Các sản phẩm trong đơn hàng</h6>
                         </div>
-                        <div class="col-2"> <button class="btn btn-success {{ isset($product) ? 'hide' : ''}}" id="themsp">Thêm sản phẩm</button></div>
+                        <div class="col-2"> <button class="btn btn-success" id="themsp">Thêm sản phẩm</button></div>
                     </div>
 
                 </div>
                 <div class="card-body">
-                    <form id="formsanpham" class="{{ isset($product) ? '' : 'hide'}}" action="{{ isset($product) ? route('donhangs.show.editsp', [$donhang->id, $product->id]) : route('donhangs.show.themsp', $donhang->id) }}" method="post">
-                    <!-- <form id="formsanpham" class="hide" action="{{ route('donhangs.show.themsp', $donhang->id) }}" -->
-                        <!-- method="post"> -->
+                    <!-- <form id="formsanpham" class="hide" action="{{ isset($donhang) ? route('donhangs.update', $donhang->id) : route('donhangs.save') }}" method="post"> -->
+                    <form id="formsanpham" class="hide" action="{{ route('donhangs.show.themsp', $donhang->id) }}"
+                        method="post">
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -116,7 +116,7 @@
 
                                             <div class="col">
                                                 <label for="price">Sóng</label>
-                                                <select class="form-control" id="song" name="song" value="{{ isset($product) ? $product->song : '' }}">
+                                                <select class="form-control" id="song" name="song">
                                                     <option value="">--Chọn sóng--</option>
                                                     <option>E</option>
                                                     <option>B</option>
@@ -144,7 +144,7 @@
 
                                             <div class="col">
                                                 <label for="price">Kiểu in</label>
-                                                <select class="form-control" id="kieuin" name="kieuin" value="{{ isset($product) ? $product->kieuin : '' }}">
+                                                <select class="form-control" id="kieuin" name="kieuin">
                                                     <option>Flexo</option>
                                                     <option>Offset</option>
                                                 </select>
@@ -155,7 +155,7 @@
                                                 <!-- <input type="number" class="form-control" id="productname"
                                                     name="somau"
                                                     value="{{ isset($product) ? $product->productname : '' }}"> -->
-                                                <select name="somau" id="" class="form-control" value="{{ isset($product) ? $product->somau : '' }}">
+                                                <select name="somau" id="" class="form-control">
                                                     <option>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -173,42 +173,42 @@
                                                 <label for="price">Nắp 1</label>
                                                 <input type="number" step="0.01" class="form-control" id="nap1"
                                                     name="nap1"
-                                                    value="{{ isset($product) ? $product->nap1 : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Cao nắp 1</label>
                                                 <input type="number"  step="0.01" class="form-control" id="caonap1"
                                                     name="caonap1"
-                                                    value="{{ isset($product) ? $product->caonap1 : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Nắp 2</label>
                                                 <input type="number" step="0.01" class="form-control" id="nap2"
                                                     name="nap2"
-                                                    value="{{ isset($product) ? $product->nap2 : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Cao nắp 2</label>
                                                 <input type="number" step="0.01" class="form-control" id="productname"
                                                     name="caonap2"
-                                                    value="{{ isset($product) ? $product->caonap2 : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Nắp 3</label>
                                                 <input type="number" step="0.01" class="form-control" id="productname"
                                                     name="nap3"
-                                                    value="{{ isset($product) ? $product->nap3 : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Nắp 4</label>
                                                 <input type="number" step="0.01" class="form-control" id="productname"
                                                     name="nap4"
-                                                    value="{{ isset($product) ? $product->nap4 : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
@@ -243,7 +243,7 @@
                                                 <label for="price">Lề biên</label>
                                                 <input type="number" class="form-control" id="productname"
                                                     name="lebien"
-                                                    value="{{ isset($product) ? $product->lebien : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
                                             </div>
                                         <div class="row">
@@ -262,7 +262,7 @@
                                                 <label for="price">Trọng lượng</label>
                                                 <input type="number" class="form-control" id="productname"
                                                     name="trongluong"
-                                                    value="{{ isset($product) ? $product->trongluong : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
@@ -276,21 +276,21 @@
                                                 <label for="price">Đổ bục</label>
                                                 <input type="number" class="form-control" id="productname"
                                                     name="dobuc"
-                                                    value="{{ isset($product) ? $product->dobuc : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Nén ECT</label>
                                                 <input type="number" class="form-control" id="productname"
                                                     name="nenect"
-                                                    value="{{ isset($product) ? $product->nenect : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Nén FCT</label>
                                                 <input type="number" class="form-control" id="productname"
                                                     name="nenfct"
-                                                    value="{{ isset($product) ? $product->nenfct : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
                                             </div>
                                         <div class="row">
@@ -431,7 +431,7 @@
                                                 <label for="price">Bó cột</label>
                                                 <input type="number" class="form-control" id="productname"
                                                     name="bocot"
-                                                    value="{{ isset($product) ? $product->bocot : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
@@ -439,8 +439,8 @@
                                                 <select type="number" class="form-control" id="quanmang"
                                                     name="quanmang"
                                                     value="{{ isset($product) ? $product->quanmang : '' }}">
-                                                        <option>0</option>
-                                                        <option>1</option>
+                                                        <option >0</option>
+                                                        <option >1</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -456,8 +456,7 @@
 
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Save</button>
-                                        
-                                        <button type="button" class="btn btn-warning {{ isset($product) ? 'hide' : ''}}" id="cancel">Cancel</button>
+                                        <button type="button" class="btn btn-warning" id="cancel">Cancel</button>
                                     </div>
                                 </div>
                             </div>
@@ -491,8 +490,8 @@
                                         <td>{{ $row->gia }}</td>
                                         <td>{{ $row->soluong * $row->gia }}</td>
                                         <td>
-                                            <a href="{{ route('donhangs.show.editsp', [$donhang->id, $row->id])}}" class="btn btn-warning">Sửa</a>
-                                            <a href="{{ route('donhangs.show.deletesp', [$donhang->id, $row->id])}}" class="btn btn-danger">Xóa</a>
+                                            <button class="btn btn-success" id="cauhinhsp"
+                                                onclick="cauhinhSX({{ $row->id }})">Cấu hình</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -626,13 +625,10 @@
         themspbt.addEventListener('click', function(e) {
             console.log("EEEEEEEEEE");
             formsp.classList.remove('hide');
-            //an button them
-            themspbt.classList.add('hide')
         })
 
         cancelbt.addEventListener('click', function() {
             formsp.classList.add('hide');
-            themspbt.classList.remove('hide')
         })
     </script>
 

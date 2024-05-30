@@ -100,13 +100,18 @@ Route::middleware('auth')->group(function () {
         Route::get('', 'index')->name('donhangs');
         Route::get('add', 'add')->name('donhangs.add');
         Route::post('save', 'save')->name('donhangs.save');
-        Route::get('show/{id}', 'show')->name('donhangs.show');
-        Route::post('show/{id}/themsp', 'themsp')->name('donhangs.show.themsp');
         Route::get('edit/{id}', 'edit')->name('donhangs.edit');
         Route::post('edit/{id}', 'update')->name('donhangs.update');
         Route::get('delete/{id}', 'delete')->name('donhangs.delete');
 
         Route::post('themkhachhang', 'themkhachhang')->name('donhangs.themkhachhang.save');
+
+        //chuc nang show co them liet ke them sua xoa san pham
+        Route::get('show/{id}', 'show')->name('donhangs.show');
+        Route::post('show/{id}/themsp', 'themsp')->name('donhangs.show.themsp');
+        Route::get('show/{id}/edit/{sid}', 'editsp')->name('donhangs.show.editsp');
+        Route::post('show/{id}/edit/{sid}', 'updatesp')->name('donhangs.show.updatesp');
+        Route::get('show/{id}/delete/{sid}', 'deletesp')->name('donhangs.show.deletesp');
     });
 
     Route::controller(SanphamController::class)->prefix('sanphams')->group(function () {
