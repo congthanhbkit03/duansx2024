@@ -3,7 +3,7 @@
 @section('title', 'Form Category')
  
 @section('contents')
-  <form action="{{ route('cauhinhs.save')}}" method="post">  
+  <form action="{{ route('cauhinhs.save.bu')}}" method="post">  
   @csrf
     <div class="row">
       <div class="col-12">

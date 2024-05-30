@@ -140,11 +140,15 @@
                 @endif
 
                 <div class="sb-sidenav-menu-heading">Cấu hình</div>
-                <a class="nav-link" href={{ route('cauhinhs.form') }}>
+                <a class="nav-link" href={{ route('cauhinhs.form.bu') }}>
                         <div class="sb-nav-link-icon"><i class="fa fa-config"></i></div>
                         Thiết lập bù sóng
-                    </a>
+                </a>
 
+                <a class="nav-link" href={{ route('cauhinhs.form.khogiay') }}>
+                        <div class="sb-nav-link-icon"><i class="fa fa-config"></i></div>
+                        Thiết lập Khổ giấy
+                </a>
 
             </div>
         </div>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Thông tin Đơn Hàng')
+@section('title', '')
 
 @push('styles')
     <style>
@@ -17,13 +17,18 @@
         <div class="col-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Thông tin đơn hàng</h6>
+                    <h3 class="m-0 font-weight-bold text-primary">Thông tin đơn hàng: {{$donhang->madonhang}}</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            Tên khách hàng:<strong> {{ $donhang->khachhang->tenkh }} </strong>
+                            Tên KH:<strong> {{ $donhang->khachhang->tenkh }} </strong>
                         </div>
+                        <div class="col">
+                            Mã KH:<strong> {{ $donhang->khachhang->makh }} </strong>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col">
                             Ngày giao hàng:<strong> {{ $donhang->ngaygiaohang }} </strong>
                         </div>
@@ -59,7 +64,7 @@
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary">
-                                            {{ isset($product) ? 'Form Edit product' : 'Form plus product' }}</h6>
+                                            {{ isset($product) ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm vào đơn hàng' }}</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
@@ -85,8 +90,9 @@
                                             <div class="col">
                                                 <label for="price">Kiểu sản phẩm</label>
                                                 <select name="kieusp">
+                                                    <option>Thùng</option>
                                                     <option>Hộp</option>
-                                                    <option>Miếng</option>
+                                                    <option>Phôi</option>
                                                 </select>
                                             </div>
 
@@ -111,20 +117,16 @@
                                             <div class="col">
                                                 <label for="price">Sóng</label>
                                                 <select class="form-control" id="song" name="song">
-                                                    <option>A</option>
+                                                    <option value="">--Chọn sóng--</option>
+                                                    <option>E</option>
                                                     <option>B</option>
                                                     <option>C</option>
-                                                    <option>D</option>
-                                                    <option>AB</option>
-                                                    <option>AC</option>
-                                                    <option>AD</option>
+                                                    <option>A</option>
+                                                    <option>BE</option>
                                                     <option>BC</option>
-                                                    <option>BD</option>
-                                                    <option>CD</option>
-                                                    <option>ABC</option>
-                                                    <option>ABD</option>
-                                                    <option>ACD</option>
-                                                    <option>BCD</option>
+                                                    <option>CE</option>
+                                                    <option>CBE</option>
+                                                    <option>ABE</option>                                                    
                                                 </select>
                                             </div>
 
@@ -150,67 +152,91 @@
 
                                             <div class="col">
                                                 <label for="price">Số màu</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <!-- <input type="number" class="form-control" id="productname"
                                                     name="somau"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->productname : '' }}"> -->
+                                                <select name="somau" id="" class="form-control">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col">
                                                 <label for="price">Nắp 1</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="number" step="0.01" class="form-control" id="nap1"
                                                     name="nap1"
                                                     value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Cao nắp 1</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="number"  step="0.01" class="form-control" id="caonap1"
                                                     name="caonap1"
                                                     value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Nắp 2</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="number" step="0.01" class="form-control" id="nap2"
                                                     name="nap2"
                                                     value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Cao nắp 2</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="number" step="0.01" class="form-control" id="productname"
                                                     name="caonap2"
                                                     value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Nắp 3</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="number" step="0.01" class="form-control" id="productname"
                                                     name="nap3"
                                                     value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Nắp 4</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="number" step="0.01" class="form-control" id="productname"
                                                     name="nap4"
                                                     value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Lằng</label>
-                                                <input type="number" class="form-control" id="productname"
-                                                    name="lang"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                <select class="form-control" id="lang" name="lang" value="{{ isset($product) ? $product->lang : '' }}">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                               
                                             </div>
-
+                                      
                                             <div class="col">
                                                 <label for="price">Bát</label>
-                                                <input type="number" class="form-control" id="productname"
-                                                    name="bat"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                <select class="form-control" id="bat" name="bat" value="{{ isset($product) ? $product->bat : '' }}">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                </select>
+                                               
                                             </div>
 
                                             <div class="col">
@@ -219,17 +245,17 @@
                                                     name="lebien"
                                                     value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
-                                        </div>
+                                            </div>
                                         <div class="row">
                                             <div class="col">
                                                 <label for="khogiay">Khổ giấy:</label>
-                                                <select class="form-control" name="khogiay">
-                                                    <option>A4</option>
+                                                <select class="form-control" name="khogiay" id="khogiay" value="{{ isset($product) ? $product->khogiay : '' }}">
+                                                    <!-- <option>A4</option>
                                                     <option>A3</option>
                                                     <option>A2</option>
                                                     <option>B4</option>
                                                     <option>B3</option>
-                                                    <option>B2</option>
+                                                    <option>B2</option> -->
                                                 </select>
                                             </div>
                                             <div class="col">
@@ -241,9 +267,9 @@
 
                                             <div class="col">
                                                 <label for="price">Diện tích</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="number" class="form-control" id="dientich"
                                                     name="dientich"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->dientich : '' }}">
                                             </div>
 
                                             <div class="col">
@@ -266,107 +292,139 @@
                                                     name="nenfct"
                                                     value="{{ isset($product) ? $product->productname : '' }}">
                                             </div>
-
+                                            </div>
+                                        <div class="row">
                                             <div class="col">
                                                 <label for="price">Mặt 3</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="text" class="form-control" id="mat3"
                                                     name="mat3"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->mat3 : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Sóng 3</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="text" class="form-control" id="song3"
                                                     name="song3"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->song3 : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Mặt 2</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="text" class="form-control" id="mat2"
                                                     name="mat2"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->mat2 : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Sóng 2</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="text" class="form-control" id="song2"
                                                     name="song2"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->song2 : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Mặt 1</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="text" class="form-control" id="mat1"
                                                     name="mat1"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->mat1 : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Sóng 1</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="text" class="form-control" id="song1"
                                                     name="song1"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->song1 : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Mặt in</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="text" class="form-control" id="matin"
                                                     name="matin"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->matin : '' }}">
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col">
                                                 <label for="price">Chống thấm</label>
-                                                <select name="chongtham" id="">
-                                                    <option>Có</option>
-                                                    <option>Không</option>
+                                                <select name="chongtham" class="form-control" id="chongtham"  value="{{ isset($product) ? $product->chongtham : '' }}">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
                                                 </select>
                                                 <!-- <input type="number" class="form-control" id="productname" name="chongtham" value="{{ isset($product) ? $product->productname : '' }}"> -->
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Cán màng</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <select type="number" class="form-control" id="canmang"
                                                     name="canmang"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->canmang : '' }}">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Bồi</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <select type="number" class="form-control" id="boi"
                                                     name="boi"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->boi : '' }}">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Chạp</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <select type="number" class="form-control" id="chap"
                                                     name="chap"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->chap : '' }}">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Bế</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <select type="number" class="form-control" id="be"
                                                     name="be"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->be : '' }}">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Dán</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <select type="number" class="form-control" id="dan"
                                                     name="dan"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->dan : '' }}">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
                                             </div>
 
                                             <div class="col">
                                                 <label for="price">Ghim</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <select type="number" class="form-control" id="ghim"
                                                     name="ghim"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->ghim : '' }}">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
                                             </div>
 
                                             <div class="col">
@@ -378,16 +436,20 @@
 
                                             <div class="col">
                                                 <label for="price">Quấn màng</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <select type="number" class="form-control" id="quanmang"
                                                     name="quanmang"
-                                                    value="{{ isset($product) ? $product->productname : '' }}">
+                                                    value="{{ isset($product) ? $product->quanmang : '' }}">
+                                                        <option >0</option>
+                                                        <option >1</option>
+                                                </select>
                                             </div>
-
+                                        </div>
+                                        <div class="row">
                                             <div class="col">
                                                 <label for="price">Ghi chú</label>
                                                 <textarea name="ghichu" class="form-control">
 
-                          </textarea>
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div> <!--  end card body -->
@@ -408,6 +470,7 @@
                                     <th>Ma SP</th>
                                     <th>Tên SP</th>
                                     <th>Kết cấu</th>
+                                    <th>Mô tả</th>
                                     <th>Số lượng</th>
                                     <th>Giá</th>
                                     <th>Thành tiền</th>
@@ -422,6 +485,7 @@
                                         <th>{{ $row->masp }}</th>
                                         <td>{{ $row->tensp }}</td>
                                         <td>{{ $row->ketcau }}</td>
+                                        <td>{{ $row->mota }}</td>
                                         <td>{{ $row->soluong }}</td>
                                         <td>{{ $row->gia }}</td>
                                         <td>{{ $row->soluong * $row->gia }}</td>
@@ -477,6 +541,7 @@
         //xu ly onchange tren input
         const daiInp = document.querySelector('#dai');
         const rongInp = document.querySelector('#rong');
+        const caoInp = document.querySelector('#cao');
         const daiphoi = document.querySelector('#daiphoi')
         rongInp.addEventListener('input', function(e) {
             if (rongInp.value.length > 0 && !isNaN(daiInp.value) && !isNaN(rongInp.value)) {
@@ -485,8 +550,18 @@
             }
         })
 
+        //thay doi caoInput -> cao nap
+        const caonapInp =document.querySelector('#caonap1');
+        caoInp.addEventListener('input', function(e){
+            caonapInp.value = e.target.value;
+        })
+
         const songSelect =document.querySelector('#song')
         const rongphoig = document.querySelector('#rongphoi')
+        const nap1 =document.querySelector('#nap1')
+        const nap2 =document.querySelector('#nap2')
+        const dientich =document.querySelector('#dientich')
+        //thay doi sóng => thay đổi bù => cập nhật rộng phôi, nap1, nap2
         songSelect.addEventListener('change', function(e){
             console.log(this.value);
             axios.get('{{route('getcauhinh', 'bu')}}')
@@ -500,17 +575,47 @@
                     bu =buconf.song1;
                 } else if (this.value.length == 2){
                     bu =buconf.song2;
-                } else {
+                } else if (this.value.length == 3){
                     bu =buconf.song3;
+                } else {
+                    bu = 0;
                 }
                 console.log(bu);
 
                 //rongphoi = Rong + Cao + Bu
                 rongphoig.value = parseInt(rong.value) + parseInt(cao.value) + parseInt(bu);
+
+                //cap nhat nap1 = nap2 dua vao rong va bu
+                nap1.value = (parseFloat(rongInp.value) + parseFloat(bu)) / 2;
+                nap2.value = (parseFloat(rongInp.value) +parseFloat( bu)) / 2;
+
+                dientich.value = daiphoi.value * rongphoi.value;
+                //rong phoi thay doi => thay doi dientich
+
+
             })
             .catch(err => {
                 alert("Khong truy cap duoc thong tin cau hinh bu song")
             })
+        })
+
+        //load du lieu vao select Khogiay
+        const selectKhogiay = document.querySelector('#khogiay');
+        //get khogiay
+        axios.get('{{ route('getcauhinh', 'khogiay')}}')
+        .then( response => {
+            console.log(response);
+            const tmp =response.data.value;
+            options = tmp.split(',');
+            console.log(options);
+            options.forEach(option => {
+                //tao cac option tu server
+                const opt  =document.createElement("option");
+                opt.innerText = option;
+                selectKhogiay.append(opt);
+
+            })
+
         })
     </script>
     <script>

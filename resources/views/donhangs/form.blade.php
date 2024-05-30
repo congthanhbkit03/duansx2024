@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Form Thêm Đơn Hàng')
+@section('title', '')
 
 @push('styles')
     <style>
@@ -57,8 +57,8 @@
             <div class="col-12">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            {{ isset($donhang) ? 'Chỉnh sửa đơn hàng' : 'Thêm mới đơn hàng' }}</h6>
+                        <h3 class="m-0 font-weight-bold text-primary">
+                            {{ isset($donhang) ? 'Sửa thông tin đơn hàng' : 'Thêm mới đơn hàng' }}</h3>
                     </div>
                     <div class="card-body">
                         <!-- <div class="form-group">

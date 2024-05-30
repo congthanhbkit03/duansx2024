@@ -59,7 +59,7 @@ class DonhangController extends Controller
         ];
 
         $newdh = Donhang::create($data);
-        $newdh->madonhang = "SO" . sprintf("%06d", $newdh->id);
+        $newdh->madonhang = "PO" . sprintf("%06d", $newdh->id);
         $newdh->save();
 
         //chuyen sang don hang moi vua duoc tao

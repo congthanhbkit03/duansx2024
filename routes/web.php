@@ -124,7 +124,9 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(CauhinhController::class)->prefix('cauhinhs')->group(function () {
         Route::get('cauhinhs/{key}', 'getValueByKey')->name('getcauhinh'); //cho ben ngoai su dung
-        Route::get('bu', 'getBu')->name('cauhinhs.form');
-        Route::post('bu', 'saveBu')->name('cauhinhs.save');
+        Route::get('bu', 'getBu')->name('cauhinhs.form.bu');
+        Route::post('bu', 'saveBu')->name('cauhinhs.save.bu');
+        Route::get('khogiay', 'getKhogiay')->name('cauhinhs.form.khogiay');
+        Route::post('khogiay', 'saveKhogiay')->name('cauhinhs.save.khogiay');
     });
 });

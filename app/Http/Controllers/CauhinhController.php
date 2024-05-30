@@ -26,7 +26,7 @@ class CauhinhController extends Controller
     {
         $cauhinh = Cauhinh::where('key', 'bu')->first();
 
-        return view('cauhinhs.form', ['cauhinh' => $cauhinh]);
+        return view('cauhinhs.bu.form', ['cauhinh' => $cauhinh]);
     }
 
 
@@ -40,7 +40,7 @@ class CauhinhController extends Controller
         // $bu->save();
         // category::create(['name' => $request->name]);
 
-        return redirect()->route('cauhinhs.form');
+        return redirect()->route('cauhinhs.form.bu');
     }
 
 }
