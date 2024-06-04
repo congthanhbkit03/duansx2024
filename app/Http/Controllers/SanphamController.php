@@ -6,6 +6,7 @@ use App\Models\Donhang;
 use App\Models\Sanpham;
 use Illuminate\Http\Request;
 use DataTables;
+use DB;
 
 
 class SanphamController extends Controller
@@ -148,5 +149,24 @@ class SanphamController extends Controller
         // $myArray = explode(',', $cds);
         return response()->json($cds); //tra ve dang { congdoan: "1,2, 4, 5, 6"}
         // return $myArray;
+    }
+
+    //tim san pham theo ten khach hang da mua - khac voi don hang hien tai dang mua
+    public function timSptheoMaKH($makh, $donhanghientai)
+    {
+        //lay tat ca ma san pham cua khach hang - chuyen sang array voi pluck va toArray
+        $sanpham_ids = DB::table('donhangs')
+            ->join('donhang_chitiets', 'donhang_chitiets.donhang_id', '=', 'donhangs.id')
+            ->where('donhangs.id', '<>', $donhanghientai)
+            ->pluck('sanpham_id')->toArray();
+        // dd($sanpham_ids);
+        // exit();
+
+        //tim tat ca san pham trong ma nay
+        $sanphams = Sanpham::whereIn('id', $sanpham_ids)->get();
+        // $sanphams = DB::table('sanphams')->whereIn('id', $sanpham_ids)->select('*')->get();
+        // dd($sanphams);
+        // exit();
+        return response()->json($sanphams);
     }
 }

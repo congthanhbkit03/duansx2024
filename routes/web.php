@@ -6,6 +6,7 @@ use App\Http\Controllers\congdoanController;
 use App\Http\Controllers\DonhangController;
 use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\SanphamController;
+use App\Http\Controllers\DonhangchitietController;
 use App\Models\Sanpham;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -125,6 +126,8 @@ Route::middleware('auth')->group(function () {
         Route::get('delete/{id}', 'delete')->name('sanphams.delete');
 
         Route::get('{id}/congdoan', 'getCongdoan')->name('sanphams.congdoan');
+
+        Route::get('timSP/{makh}/{donhanghientai}', 'timSptheoMaKH')->name('timsptheomakh');
     });
 
     Route::controller(CauhinhController::class)->prefix('cauhinhs')->group(function () {
@@ -133,5 +136,9 @@ Route::middleware('auth')->group(function () {
         Route::post('bu', 'saveBu')->name('cauhinhs.save.bu');
         Route::get('khogiay', 'getKhogiay')->name('cauhinhs.form.khogiay');
         Route::post('khogiay', 'saveKhogiay')->name('cauhinhs.save.khogiay');
+    });
+
+    Route::controller(DonhangChitietController::class)->prefix('dhct')->group(function () {
+        Route::post('save', 'save')->name('donhangchitiet.save');
     });
 });

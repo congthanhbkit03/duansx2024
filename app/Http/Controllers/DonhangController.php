@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Congdoan;
 use App\Models\Donhang;
+use App\Models\DonhangChitiet;
 use App\Models\Khachhang;
 use App\Models\Sanpham;
 use Illuminate\Http\Request;
 use DataTables;
-
+use DB;
 
 class DonhangController extends Controller
 {
@@ -103,7 +104,13 @@ class DonhangController extends Controller
     public function show($id)
     {
         $donhang = Donhang::find($id);
-        $sanphams = Sanpham::where('donhang_id', $id)->get();
+        //tim tat ca san pham thuoc don hang thong qua table donhang_chititets
+        // $sanphams = Sanpham::where('donhang_id', $id)->get();
+        $sanphams = DB::table('sanphams')
+            ->select('sanphams.id as id', 'masp', 'tensp', 'ketcau', 'mota', 'soluong', 'gia')
+            ->join('donhang_chitiets', 'donhang_chitiets.sanpham_id', '=', 'sanphams.id')
+            ->where('donhang_chitiets.donhang_id', $donhang->id)
+            ->get();
         $congdoans = Congdoan::all();
         return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans]);
     }
@@ -196,18 +203,29 @@ class DonhangController extends Controller
             'ghim' => $request->ghim,
             'bocot' => $request->bocot,
             'quanmang' => $request->quanmang,
-            'trangthai' => '0',
+            // 'trangthai' => '0',
             'congdoan' => '',
-            'donhang_id' => $id,
+            // 'donhang_id' => $id,
             'ketcau' => $ketcau,
             'mota' => $mota,
-            'gia' => $request->gia,
-            'soluong' => $request->soluong
+            // 'gia' => $request->gia,
+            // 'soluong' => $request->soluong
         ];
 
         $newsp = Sanpham::create($data);
         $newsp->masp = "SP" . sprintf("%07d", $newsp->id);
         $newsp->save();
+
+        //cap nhat vao don hang chi tiet
+        $data_dh_chitiet = [
+            'donhang_id' => $id,
+            'sanpham_id' => $newsp->id,
+            'soluong' => $request->soluong,
+            'gia' => $request->gia,
+            'trangthai' => 'Chưa sản xuất'
+        ];
+
+        DonhangChitiet::create($data_dh_chitiet);
 
         return redirect()->route('donhangs.show', $id);
     }
@@ -215,17 +233,25 @@ class DonhangController extends Controller
     public function editsp($id, $sid)
     {
         $donhang = Donhang::find($id);
-        $sanphams = Sanpham::where('donhang_id', $id)->get();
+        // $sanphams = Sanpham::where('donhang_id', $id)->get();
+        $sanphams = DB::table('sanphams')
+            ->select('sanphams.id as id', 'masp', 'tensp', 'ketcau', 'mota', 'soluong', 'gia')
+            ->join('donhang_chitiets', 'donhang_chitiets.sanpham_id', '=', 'sanphams.id')
+            ->where('donhang_chitiets.donhang_id', $donhang->id)
+            ->get();
+        $chitiet = DonhangChitiet::where('donhang_id', $id)->where('sanpham_id', $sid)->first();
+        // dd($chitiet);
+        // exit();
         $congdoans = Congdoan::all();
         // return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans]);
         $product = Sanpham::find($sid);
 
-        return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans, 'product' => $product]);
+        return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans, 'product' => $product, 'chitiet' => $chitiet]);
     }
     public function updatesp(Request $request, $id, $sid)
     {
         $sanpham = Sanpham::find($sid);
-
+        $chitiet = DonhangChitiet::where('donhang_id', $id)->where('sanpham_id', $sid)->first();
         $ketcau = " {$request->kieusp}-{$request->dai}-{$request->rong}-{$request->cao}-{$request->song}-{$request->kieuin}";
         $mota = " Kiểu: {$request->kieusp}, Kích thước: {$request->dai}x{$request->rong}x{$request->cao}, Sóng: {$request->song}, In: {$request->kieuin}";
         $data = [
@@ -273,13 +299,13 @@ class DonhangController extends Controller
             'ghim' => $request->ghim,
             'bocot' => $request->bocot,
             'quanmang' => $request->quanmang,
-            'trangthai' => '0',
+            // 'trangthai' => '0',
             'congdoan' => '',
-            'donhang_id' => $id,
+            // 'donhang_id' => $id,
             'ketcau' => $ketcau,
             'mota' => $mota,
-            'gia' => $request->gia,
-            'soluong' => $request->soluong
+            // 'gia' => $request->gia,
+            // 'soluong' => $request->soluong
         ];
 
         // $newsp = Sanpham::create($data);
@@ -287,12 +313,21 @@ class DonhangController extends Controller
         // $newsp->save();
         $sanpham->update($data);
 
+        $data_dh_chitiet = [
+            'soluong' => $request->soluong,
+            'gia' => $request->gia,
+            'trangthai' => 'Chưa sản xuất'
+        ];
+        $chitiet->update($data_dh_chitiet);
+
         return redirect()->route('donhangs.show', $id);
     }
 
     public function deletesp($id, $sid)
     {
-        Sanpham::find($sid)->delete();
+        // Sanpham::find($sid)->delete();
+        DonhangChitiet::where('donhang_id', $id)->where('sanpham_id', $sid)->first()->delete();
+
         return redirect()->route('donhangs.show', $id);
     }
 }

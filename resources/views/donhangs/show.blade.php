@@ -47,12 +47,38 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-8">
                             <h6 class="m-0 font-weight-bold text-primary">Các sản phẩm trong đơn hàng</h6>
                         </div>
-                        <div class="col-2"> <button class="btn btn-success {{ isset($product) ? 'hide' : ''}}" id="themsp">Thêm sản phẩm</button></div>
+                        <div class="col-4"> 
+                        <button class="btn btn-primary {{ isset($product) ? 'hide' : ''}}" id="themspdaco">Thêm SP đã có</button>
+                        <button class="btn btn-success {{ isset($product) ? 'hide' : ''}}" id="themsp">Thêm SP mới</button></div>
                     </div>
-
+                    <div class="row spcu hide">
+                        <form action="{{ route('donhangchitiet.save')}}" method="post" style="border: 1px solid blue; padding: 10px; margin: 15px 0;">
+                        @csrf   
+                        <div class="row">
+                        <div class="col-6">
+                            <input type="hidden" name="donhang_id" value="{{$donhang->id}}">
+                            Nhập mã sản phẩm (không chứa phần chữ - vd: 15)<br>
+                            <input type="text" id="masp" class="form-control" name="sanpham_id">
+                            <br>
+                            Hoặc nhập từ khóa tìm kiếm nếu không nhớ mã sản phẩm:
+                            <button type="button" id="searchsp" class="form-control">Mở form tìm kiếm</button>
+                        </div>
+                        <div class="col-6">
+                            Số lượng:
+                            <input type="text" name="soluong" id="soluong" class="form-control">
+                            <br>
+                            Giá:
+                            <input type="text" name="gia" id="gia" class="form-control">
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary">Lưu</button>
+                        </div>
+                        </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="card-body">
                     <form id="formsanpham" class="{{ isset($product) ? '' : 'hide'}}" action="{{ isset($product) ? route('donhangs.show.editsp', [$donhang->id, $product->id]) : route('donhangs.show.themsp', $donhang->id) }}" method="post">
@@ -77,22 +103,22 @@
                                             <div class="col">
                                                 <label for="productname">Số lượng</label>
                                                 <input type="text" class="form-control" id="productname" name="soluong"
-                                                    value="{{ isset($product) ? $product->soluong : '' }}">
+                                                    value="{{ isset($chitiet) ? $chitiet->soluong : '' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="productname">Giá</label>
                                                 <input type="text" class="form-control" id="productname" name="gia"
-                                                    value="{{ isset($product) ? $product->gia : '' }}">
+                                                    value="{{ isset($chitiet) ? $chitiet->gia : '' }}">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <label for="price">Kiểu sản phẩm</label>
-                                                <select name="kieusp">
-                                                    <option>Thùng</option>
-                                                    <option>Hộp</option>
-                                                    <option>Phôi</option>
+                                                <select name="kieusp" class="form-control" >
+                                                    <option  {{ isset($product) ? ($product->kieusp == 'Thùng' ? 'selected' : '') : '' }}>Thùng</option>
+                                                    <option  {{ isset($product) ? ($product->kieusp == 'Hộp' ? 'selected' : '') : '' }}>Hộp</option>
+                                                    <option  {{ isset($product) ? ($product->kieusp == 'Phôi' ? 'selected' : '') : '' }}>Phôi</option>
                                                 </select>
                                             </div>
 
@@ -118,15 +144,15 @@
                                                 <label for="price">Sóng</label>
                                                 <select class="form-control" id="song" name="song" value="{{ isset($product) ? $product->song : '' }}">
                                                     <option value="">--Chọn sóng--</option>
-                                                    <option>E</option>
-                                                    <option>B</option>
-                                                    <option>C</option>
-                                                    <option>A</option>
-                                                    <option>BE</option>
-                                                    <option>BC</option>
-                                                    <option>CE</option>
-                                                    <option>CBE</option>
-                                                    <option>ABE</option>                                                    
+                                                    <option {{ isset($product) ? ($product->song == 'E' ? 'selected' : '') : '' }}>E</option>
+                                                    <option {{ isset($product) ? ($product->song == 'B' ? 'selected' : '') : '' }}>B</option>
+                                                    <option {{ isset($product) ? ($product->song == 'C' ? 'selected' : '') : '' }}>C</option>
+                                                    <option {{ isset($product) ? ($product->song == 'A' ? 'selected' : '') : '' }}>A</option>
+                                                    <option {{ isset($product) ? ($product->song == 'BE' ? 'selected' : '') : '' }}>BE</option>
+                                                    <option {{ isset($product) ? ($product->song == 'BC' ? 'selected' : '') : '' }}>BC</option>
+                                                    <option {{ isset($product) ? ($product->song == 'CE' ? 'selected' : '') : '' }}>CE</option>
+                                                    <option {{ isset($product) ? ($product->song == 'CBE' ? 'selected' : '') : '' }}>CBE</option>
+                                                    <option {{ isset($product) ? ($product->song == 'ABE' ? 'selected' : '') : '' }}>ABE</option>                                                    
                                                 </select>
                                             </div>
 
@@ -213,39 +239,34 @@
 
                                             <div class="col">
                                                 <label for="price">Lằng</label>
-                                                <select class="form-control" id="lang" name="lang" value="{{ isset($product) ? $product->lang : '' }}">
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
+                                                <select class="form-control" id="lang" name="lang"">
+                                                    <option {{ isset($product) ? ($product->lang == 0 ? 'selected' : '') : '' }}>0</option>
+                                                    <option {{ isset($product) ? ($product->lang == 1 ? 'selected' : '') : '' }}>1</option>
+                                                    <option {{ isset($product) ? ($product->lang == 2 ? 'selected' : '') : '' }}>2</option>
+                                                    <option {{ isset($product) ? ($product->lang == 3 ? 'selected' : '') : '' }}>3</option>
+                                                    <option {{ isset($product) ? ($product->lang == 4 ? 'selected' : '') : '' }}>4</option>
                                                 </select>
                                                
                                             </div>
                                       
                                             <div class="col">
                                                 <label for="price">Bát</label>
-                                                <select class="form-control" id="bat" name="bat" value="{{ isset($product) ? $product->bat : '' }}">
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-                                                    <option>8</option>
+                                                <select class="form-control" id="bat" name="bat">
+                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>0</option>
+                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>1</option>
+                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>2</option>
+                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>3</option>
+                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>4</option>
+                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>5</option>
+                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>6</option>
+                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>7</option>
+                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>8</option>
                                                 </select>
                                                
                                             </div>
 
-                                            <div class="col">
-                                                <label for="price">Lề biên</label>
-                                                <input type="number" class="form-control" id="productname"
-                                                    name="lebien"
-                                                    value="{{ isset($product) ? $product->lebien : '' }}">
-                                            </div>
-                                            </div>
+                                            
+                                        </div>
                                         <div class="row">
                                             <div class="col">
                                                 <label for="khogiay">Khổ giấy:</label>
@@ -259,8 +280,14 @@
                                                 </select>
                                             </div>
                                             <div class="col">
+                                                <label for="price">Lề biên</label>
+                                                <input type="number" class="form-control" id="lebien"
+                                                    name="lebien"
+                                                    value="{{ isset($product) ? $product->lebien : '' }}">
+                                            </div>
+                                            <div class="col">
                                                 <label for="price">Trọng lượng</label>
-                                                <input type="number" class="form-control" id="productname"
+                                                <input type="number" class="form-control" id="trongluong"
                                                     name="trongluong"
                                                     value="{{ isset($product) ? $product->trongluong : '' }}">
                                             </div>
@@ -507,7 +534,7 @@
     <!-- </form> -->
 
 
-    <!-- Modal -->
+    <!-- Modal 1-->
     <div class="modal fade" id="cauhinhForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -535,6 +562,32 @@
         </div>
     </div>
 
+        <!-- Modal 1-->
+    <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Các sản phẩm đã mua </h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered" style="heght: 400px;">
+                        <thead>
+                            <th>Mã SP</th>
+                            <th>Tên SP</th>
+                            <th>Kết Cấu</th>
+                            <th>Chọn</th>
+                        </thead>
+                        <tbody  id="dssp"></tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
@@ -562,6 +615,7 @@
         const nap1 =document.querySelector('#nap1')
         const nap2 =document.querySelector('#nap2')
         const dientich =document.querySelector('#dientich')
+        const bat =document.querySelector('#bat')
         //thay doi sóng => thay đổi bù => cập nhật rộng phôi, nap1, nap2
         songSelect.addEventListener('change', function(e){
             console.log(this.value);
@@ -617,6 +671,11 @@
 
             })
 
+        })
+
+        khogiay.addEventListener('change', function(e){
+            //lebien = khogiay - (rongphoi x bat)
+            document.querySelector('#lebien').value =khogiay.value - (rongphoi.value * bat.value);
         })
     </script>
     <script>
@@ -681,5 +740,46 @@
                 console.log(data);
             })
         });
+    </script>
+
+    <script>
+        //xu ly nhan nut them san pham da ton tai
+        const themspdaco =document.querySelector('#themspdaco');
+        const spcu =document.querySelector('.spcu');
+        themspdaco.addEventListener('click', (e) => {
+            spcu.classList.remove('hide');
+        })
+
+        const modal2 = new bootstrap.Modal(document.querySelector('#modal2'));
+        const dssp = document.querySelector('#dssp');
+        //input cho search sanpham
+        document.querySelector('#searchsp').addEventListener('click', (e) => {
+            dssp.innerHTML = "";
+            //fetch api - tim cac san pham da mua cua khach hang nay
+            //$donhang->khachhang->makh
+            axios('{{ route('timsptheomakh', [$donhang->khachhang->id, $donhang->id])}}')
+            .then(response => {
+                console.log(response);
+                //hien thi trong modal2
+                modal2.show();
+
+                response.data.forEach(sp => {
+                    const tr =document.createElement("tr")
+                    tr.innerHTML = `
+                        <td>${sp.masp}</td>
+                        <td>${sp.tensp}</td>
+                        <td>${sp.ketcau}</td>
+                        <td>${sp.ketcau}</td>
+                        <td><button type="button" onclick="chonSP(${sp.id})">Chọn</button></td>
+                    `
+                    dssp.append(tr);
+                })
+            })
+        })
+
+        function chonSP(id){
+            document.querySelector('#masp').value = id;
+            modal2.hide();
+        }
     </script>
 @endpush
