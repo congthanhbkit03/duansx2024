@@ -6,6 +6,7 @@ use App\Models\Congdoan;
 use App\Models\Donhang;
 use App\Models\DonhangChitiet;
 use App\Models\Khachhang;
+use App\Models\khogiay;
 use App\Models\Sanpham;
 use Illuminate\Http\Request;
 use DataTables;
@@ -106,13 +107,15 @@ class DonhangController extends Controller
         $donhang = Donhang::find($id);
         //tim tat ca san pham thuoc don hang thong qua table donhang_chititets
         // $sanphams = Sanpham::where('donhang_id', $id)->get();
+        $khogiays = khogiay::all();
+
         $sanphams = DB::table('sanphams')
             ->select('sanphams.id as id', 'masp', 'tensp', 'ketcau', 'mota', 'soluong', 'gia')
             ->join('donhang_chitiets', 'donhang_chitiets.sanpham_id', '=', 'sanphams.id')
             ->where('donhang_chitiets.donhang_id', $donhang->id)
             ->get();
         $congdoans = Congdoan::all();
-        return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans]);
+        return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans, 'khogiays' => $khogiays]);
     }
 
     public function edit($id)
@@ -209,7 +212,7 @@ class DonhangController extends Controller
             'ketcau' => $ketcau,
             'mota' => $mota,
             // 'gia' => $request->gia,
-            // 'soluong' => $request->soluong
+            'khachhang_id' => $request->khachhang_id
         ];
 
         $newsp = Sanpham::create($data);
@@ -245,8 +248,8 @@ class DonhangController extends Controller
         $congdoans = Congdoan::all();
         // return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans]);
         $product = Sanpham::find($sid);
-
-        return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans, 'product' => $product, 'chitiet' => $chitiet]);
+        $khogiays = khogiay::all();
+        return view('donhangs.show', ['donhang' => $donhang, 'sanphams' => $sanphams, 'congdoans' => $congdoans, 'product' => $product, 'chitiet' => $chitiet, 'khogiays' => $khogiays]);
     }
     public function updatesp(Request $request, $id, $sid)
     {

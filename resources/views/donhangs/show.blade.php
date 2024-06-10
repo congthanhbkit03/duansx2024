@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-
+                                            <input type="hidden" name="khachhang_id" value="{{ $donhang->khachhang_id}}">
                                             <div class="col">
                                                 <label for="productname">Tên sản phẩm</label>
                                                 <input type="text" class="form-control" id="productname" name="tensp"
@@ -103,13 +103,13 @@
                                             <div class="col">
                                                 <label for="productname">Số lượng</label>
                                                 <input type="text" class="form-control" id="productname" name="soluong"
-                                                    value="{{ isset($chitiet) ? $chitiet->soluong : '' }}">
+                                                    value="{{ isset($chitiet) ? $chitiet->soluong : '1000' }}">
                                             </div>
 
                                             <div class="col">
                                                 <label for="productname">Giá</label>
                                                 <input type="text" class="form-control" id="productname" name="gia"
-                                                    value="{{ isset($chitiet) ? $chitiet->gia : '' }}">
+                                                    value="{{ isset($chitiet) ? $chitiet->gia : '1000' }}">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -182,14 +182,14 @@
                                                     name="somau"
                                                     value="{{ isset($product) ? $product->productname : '' }}"> -->
                                                 <select name="somau" id="" class="form-control" value="{{ isset($product) ? $product->somau : '' }}">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-                                                    <option>8</option>
+                                                    <option {{ isset($product) ? ($product->somau == 1 ? 'selected' : '') : '' }}>1</option>
+                                                    <option {{ isset($product) ? ($product->somau == 2 ? 'selected' : '') : '' }}>2</option>
+                                                    <option {{ isset($product) ? ($product->somau == 3 ? 'selected' : '') : '' }}>3</option>
+                                                    <option {{ isset($product) ? ($product->somau == 4 ? 'selected' : '') : '' }}>4</option>
+                                                    <option {{ isset($product) ? ($product->somau == 5 ? 'selected' : '') : '' }}>5</option>
+                                                    <option {{ isset($product) ? ($product->somau == 6 ? 'selected' : '') : '' }}>6</option>
+                                                    <option {{ isset($product) ? ($product->somau == 7 ? 'selected' : '') : '' }}>7</option>
+                                                    <option {{ isset($product) ? ($product->somau == 8 ? 'selected' : '') : '' }}>8</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -239,9 +239,9 @@
 
                                             <div class="col">
                                                 <label for="price">Lằng</label>
-                                                <select class="form-control" id="lang" name="lang"">
+                                                <select class="form-control" id="lang" name="lang">
                                                     <option {{ isset($product) ? ($product->lang == 0 ? 'selected' : '') : '' }}>0</option>
-                                                    <option {{ isset($product) ? ($product->lang == 1 ? 'selected' : '') : '' }}>1</option>
+                                                    <option {{ isset($product) ? ($product->lang == 1 ? 'selected' : '') : 'selected' }}>1</option>
                                                     <option {{ isset($product) ? ($product->lang == 2 ? 'selected' : '') : '' }}>2</option>
                                                     <option {{ isset($product) ? ($product->lang == 3 ? 'selected' : '') : '' }}>3</option>
                                                     <option {{ isset($product) ? ($product->lang == 4 ? 'selected' : '') : '' }}>4</option>
@@ -253,14 +253,14 @@
                                                 <label for="price">Bát</label>
                                                 <select class="form-control" id="bat" name="bat">
                                                     <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>0</option>
-                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>1</option>
-                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>2</option>
-                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>3</option>
-                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>4</option>
-                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>5</option>
-                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>6</option>
-                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>7</option>
-                                                    <option {{ isset($product) ? ($product->bat == 0 ? 'selected' : '') : '' }}>8</option>
+                                                    <option {{ isset($product) ? ($product->bat == 1 ? 'selected' : '') : 'selected' }}>1</option>
+                                                    <option {{ isset($product) ? ($product->bat == 2 ? 'selected' : '') : '' }}>2</option>
+                                                    <option {{ isset($product) ? ($product->bat == 3 ? 'selected' : '') : '' }}>3</option>
+                                                    <option {{ isset($product) ? ($product->bat == 4 ? 'selected' : '') : '' }}>4</option>
+                                                    <option {{ isset($product) ? ($product->bat == 5 ? 'selected' : '') : '' }}>5</option>
+                                                    <option {{ isset($product) ? ($product->bat == 6 ? 'selected' : '') : '' }}>6</option>
+                                                    <option {{ isset($product) ? ($product->bat == 7 ? 'selected' : '') : '' }}>7</option>
+                                                    <option {{ isset($product) ? ($product->bat == 8 ? 'selected' : '') : '' }}>8</option>
                                                 </select>
                                                
                                             </div>
@@ -277,6 +277,9 @@
                                                     <option>B4</option>
                                                     <option>B3</option>
                                                     <option>B2</option> -->
+                                                    @foreach ($khogiays as $khogiay)
+                                                        <option {{ isset($product) ? ($product->khogiay == $khogiay->size ? 'selected' : '') : '' }}>{{$khogiay->size}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="col">
@@ -475,7 +478,7 @@
                                             <div class="col">
                                                 <label for="price">Ghi chú</label>
                                                 <textarea name="ghichu" class="form-control">
-
+                                                {{ isset($product) ? $product->ghichu : '' }}
                                                 </textarea>
                                             </div>
                                         </div>
@@ -657,25 +660,25 @@
         //load du lieu vao select Khogiay
         const selectKhogiay = document.querySelector('#khogiay');
         //get khogiay
-        axios.get('{{ route('getcauhinh', 'khogiay')}}')
-        .then( response => {
-            console.log(response);
-            const tmp =response.data.value;
-            options = tmp.split(',');
-            console.log(options);
-            options.forEach(option => {
-                //tao cac option tu server
-                const opt  =document.createElement("option");
-                opt.innerText = option;
-                selectKhogiay.append(opt);
+        // axios.get('{{ route('getcauhinh', 'khogiay')}}')
+        // .then( response => {
+        //     console.log(response);
+        //     const tmp =response.data.value;
+        //     options = tmp.split(',');
+        //     console.log(options);
+        //     options.forEach(option => {
+        //         //tao cac option tu server
+        //         const opt  =document.createElement("option");
+        //         opt.innerText = option;
+        //         selectKhogiay.append(opt);
 
-            })
+        //     })
 
-        })
+        // })
 
-        khogiay.addEventListener('change', function(e){
+        selectKhogiay.addEventListener('change', function(e){
             //lebien = khogiay - (rongphoi x bat)
-            document.querySelector('#lebien').value =khogiay.value - (rongphoi.value * bat.value);
+            document.querySelector('#lebien').value =selectKhogiay.value - (rongphoi.value * bat.value);
         })
     </script>
     <script>

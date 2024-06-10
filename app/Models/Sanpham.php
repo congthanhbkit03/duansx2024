@@ -65,6 +65,7 @@ class Sanpham extends Model
         'mota',
         'ketcau',
         'gia',
-        'soluong'
+        'soluong',
+        'khachhang_id'
     ];
 }

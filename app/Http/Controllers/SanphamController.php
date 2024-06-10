@@ -155,13 +155,22 @@ class SanphamController extends Controller
     public function timSptheoMaKH($makh, $donhanghientai)
     {
         //lay tat ca ma san pham cua khach hang - chuyen sang array voi pluck va toArray
-        $sanpham_ids = DB::table('donhangs')
-            ->join('donhang_chitiets', 'donhang_chitiets.donhang_id', '=', 'donhangs.id')
-            ->where('donhangs.id', '<>', $donhanghientai)
-            ->pluck('sanpham_id')->toArray();
+        // $sanpham_ids = DB::table('donhangs')
+        //     ->join('donhang_chitiets', 'donhang_chitiets.donhang_id', '=', 'donhangs.id')
+        //     ->where('donhangs.id', '<>', $donhanghientai)
+        //     ->pluck('sanpham_id')->toArray();
         // dd($sanpham_ids);
         // exit();
 
+        $sanpham_ids = DB::table('donhang_chitiets')
+            // ->join('sanphams', 'sanphams.id', '=', 'donhang_chitiets.sanpham_id')
+            ->where('donhang_id', '<>', $donhanghientai)
+            // ->select('')
+            ->distinct('sanpham_id')
+            ->pluck('sanpham_id')
+            // ->distinct()
+            ->toArray();
+        // ->where('sanphams.khachhang_id', '=', $makh)->get();
         //tim tat ca san pham trong ma nay
         $sanphams = Sanpham::whereIn('id', $sanpham_ids)->get();
         // $sanphams = DB::table('sanphams')->whereIn('id', $sanpham_ids)->select('*')->get();
